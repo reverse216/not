@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>8 Kutucuk Notlar</title>
+    <style>
+        :root{--gap:12px;--card-bg:#ffffff;--accent:#0d6efd;--muted:#666}
+        *{box-sizing:border-box}
+        body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:#f3f4f6; margin:24px;color:#111}
+        .container{max-width:1100px;margin:0 auto}
+        h1{font-size:20px;margin:0 0 16px}
+        p.lead{color:var(--muted);margin:0 0 18px}
+        .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap)}
+        @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+        @media (max-width:420px){.grid{grid-template-columns:1fr}}
+
+        .card{background:var(--card-bg);border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,0.06);overflow:hidden;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease}
+        .card:active{transform:translateY(2px)}
+        .card-header{padding:18px 14px;font-weight:600;display:flex;align-items:center;justify-content:space-between}
+        .card-sub{color:var(--muted);font-weight:500;font-size:13px}
+        .card-content{padding:0 14px 16px;height:auto;overflow:hidden;max-height:0;transition:max-height .28s ease}
+        .card.open{box-shadow:0 8px 30px rgba(13,110,253,0.08)}
+        .card.open .card-content{max-height:1200px}
+        .note{padding:12px 0;color:#222;white-space:pre-wrap;line-height:1.45}
+        .hint{font-size:13px;color:var(--muted);margin-top:10px}
+
+        /* küçük ok ikonu */
+        .arrow{width:14px;height:14px;border-left:2px solid #999;border-bottom:2px solid #999;transform:rotate(-45deg);transition:transform .2s ease;margin-left:8px}
+        .card.open .arrow{transform:rotate(45deg)}
+
+        /* Audio player styles */
+        .audio-player{margin-top:18px;background:var(--card-bg);padding:12px;border-radius:10px;box-shadow:0 1px 6px rgba(0,0,0,0.06);display:flex;gap:12px;align-items:center}
+        .audio-left{display:flex;flex-direction:column;gap:8px;min-width:160px}
+        .play-btn{background:var(--accent);color:#fff;border:none;padding:10px 12px;border-radius:8px;cursor:pointer;font-weight:600}
+        .speed-btn{background:#eee;border:none;padding:8px 10px;border-radius:8px;cursor:pointer}
+        .time{font-size:13px;color:var(--muted);min-width:70px;text-align:center}
+        .progress-wrap{flex:1;display:flex;flex-direction:column;gap:6px}
+        .progress{width:100%}
+        input[type=range].progress{
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            height: 6px;
+            background: #e6e6e6;
+            border-radius: 4px;
+        }
+        input[type=range].progress::-webkit-slider-thumb{
+            -webkit-appearance: none;
+            appearance: none;
+            width: 14px;
+            height: 14px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            cursor: pointer;
+            border: none;
+        }
+        @media (max-width:560px){.audio-player{flex-direction:column;align-items:stretch}.audio-left{flex-direction:row;justify-content:space-between}}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>8 Kutucuk Notlar</h1>
+        <p class="lead">Her bir kutucuğa tıklayın — kutucuk genişler ve uzun notunuzu gösterir. Notları doğrudan aşağıdaki "PASTE HERE" yorumlarının yerine yapıştırın.</p>
+
+        <div class="grid" id="cards">
+            <!-- Aşağıdaki her .card blokunun içinde `` şeklinde bir yorum göreceksiniz.
+                     Uzun notlarınızı o yorumların bulunduğu yere yapıştırın (HTML içinde). -->
+
+            <div class="card" data-index="1">
+                <div class="card-header">
+                    <div>
+                        Kutucuk 1
+                        <div class="card-sub">Kısa özet (1)</div>
+                    </div>
+                    <div class="arrow" aria-hidden></div>
+                </div>
+                <div class="card-content">
+                    <div class="note">
+                        "Yazılım Geliştirme Sistem Analizi ve Tasarımı Temel Kavramlar" adlı birinci dosyanın (1-37. sayfalar arası) her bir sayfasındaki başlıklar ve bilgilerin kapsamlı özeti aşağıdadır:
+
+### **Sayfa 1: Giriş ve Temel Tanımlar**
+*   **Başlık:** Yazılım Geliştirme Sistem Analizi ve Tasarımı Temel Kavramlar.
+*   **Özet:** Sistem analizi ve tasarımı kavramını anlamak için "sistem", "analiz" ve "tasarım" ifadeleri tanımlanmaktadır.
+    *   **Sistem:** Bir amaç için birleşmiş öğeler kümesidir.
+    *   **Alt Parçalar:** Bileşenler, ilişkiler ve işbirliğini içerir.
+    *   **Analiz:** Gereksinimleri ve yapıyı inceleme sürecidir.
+    *   **Tasarım:** Çözüm ve mimari oluşturma aşamasıdır.
+*   **Alt Başlık: Sistem Tanımı ve Alt Parçaları:** Sistem, en sade haliyle tek bir amaç doğrultusunda birleşmiş, birbiriyle ilişkili ve işbirlikçi çalışan öğeler kümesi olarak tanımlanır.
+
+### **Sayfa 2: Sistemin Temel Özellikleri**
+*   **Özet:**
+    *   **Ortak Amaç:** Bütün sistemlerin temel bir amacı vardır ve sistem bu amacı gerçekleştirdiği sürece varlığını sürdürür. Amaçlar alt amaçlara kırılabilir.
+    *   **İşbirliği ve Bileşenler:** Sistemler birbiriyle bağlantılı ve işbirliği içinde olan bileşenlerden oluşur.
+    *   **Sınır ve Çevre:** Her sistemin bir sınırı ve dış çevresi vardır; çevreyle etkileşim sistemin dinamik gelişmesini sağlar.
+
+### **Sayfa 3: Sistem Kategorileri**
+*   **Özet:** Sistemler literatürde ikiye ayrılır:
+    1.  **Kapalı Sistemler:** Dış çevreden izole, bağımsız yapılardır (Örn: Bir makine).
+    2.  **Açık Sistemler:** Dış çevreyle etkileşim halindedir; sadece iç işleyişle tanımlanamazlar.
+*   **Örnek:** Organizasyonlar, çevrelerinden etkilenen ve onları etkileyen temel açık sistem örnekleridir.
+
+### **Sayfa 4: Sistem Bileşenlerinin Detaylı İncelemesi (Sınır)**
+*   **Başlık:** Sistem Bileşenlerinin Detaylı İncelemesi.
+*   **Görsel:** Şekil 1.1'de sistem bileşenleri (Girdiler, Çıktılar, Alt Sistemler, Öğeler, İlişkiler, Arayüz ve Sınır) şematize edilmiştir.
+*   **1. Sınır:** Sistemi çevresinden ve diğer sistemlerden ayıran hattır. Sınır içerisindeki bileşenlere müdahale daha kolaydır. Proje yöneticisinin faaliyetlerinin (kaynak paylaşımı, çatışma yönetimi vb.) çoğu bu sınırda gerçekleşir.
+
+### **Sayfa 5: Amaç ve Çevre**
+*   **Özet:**
+    *   **2. Amaç:** Sistemler girdiyi çıktıya bir amaç doğrultusunda dönüştürür. Amaç, sistemin geçerliliği için temel ölçüttür ve gerçekçi, yüksek hedefli, ölçülebilir olmalıdır.
+    *   **3. Çevre:** Sistemin dışında kalan ve sistem tarafından doğrudan müdahale edilemeyen unsurlardır. Örn: Bir firma için tedarikçiler, müşteriler ve devlet sistem çevresidir.
+
+### **Sayfa 6: Arayüzler, Girdi ve Çıktı**
+*   **Özet:**
+    *   **4. Arayüzler:** Sistem sınırlarında bulunan ve diğer sistemlerle bağlantıyı sağlayan bileşenlerdir; bir sistemin çıktısını diğerine girdi olarak iletirler.
+    *   **5. Girdi:** Sistemin ihtiyaç duyduğu veri, hizmet, malzeme gibi kaynaklardır. Bilişim sistemlerinde temel girdi veridir.
+    *   **6. Çıktı:** Girdilerin iç mimaride dönüştürülüp dış çevreye gönderilen formudur (ürün, rapor vb.). Bilişim sistemlerinin temel çıktısı "bilgi"dir.
+
+### **Sayfa 7: Alt Sistemler ve Bileşenler**
+*   **Özet:**
+    *   **7. Alt Sistemler:** Büyük bir bütünün parçası olarak çalışan, genel sistem amacıyla çelişmeyen alt amaçlı birimlerdir. Genel sistem çıktısı, alt sistem çıktılarının toplamından büyüktür.
+    *   **8. Bileşen (Öğe):** Sistemin en küçük yapı taşlarıdır (fiziksel veya kavramsal). Her bir operasyon da bir bileşen olabilir.
+
+### **Sayfa 8: İlişki, Geri Besleme ve Kısıtlamalar**
+*   **Özet:**
+    *   **9. İlişki:** Bileşenler arası etkileşimi (mantıksal, matematiksel, zaman bazlı vb.) tanımlar.
+    *   **10. Geri Besleme:** Çıktı ile girdi arasındaki uyuşmazlıkları gidermek için kullanılan, sistemin evrimi için hayati olan işlemdir.
+    *   **11. Kısıtlamalar:** Sistemin çalışmasını sınırlayan iç ve dış unsurlardır (Örn: Projelerde kapsam, zaman, maliyet).
+
+### **Sayfa 9: Entegrasyon**
+*   **Özet:**
+    *   **12. Entegrasyon:** Tüm alt sistemlerin amaçlara ulaşmak için birlikte etkin çalışmasıdır. Sadece sistem içi değil, harici varlıklarla koordinasyon da sistemin sorunsuz işlemesi için kritiktir.
+
+### **Sayfa 10: Analiz Kavramı**
+*   **Başlık:** Analiz ve Tasarım Kavramları.
+*   **Özet:**
+    *   **Analiz:** Gerçeklerin toplanması, sorunların belirlenmesi ve sistemin alt parçalarına ayrılarak incelenmesidir.
+    *   **Sistem Analizi Süreci:** Kullanıcı beklentilerinin (gereksinim) anlaşılmasıyla başlar. Temel çıktısı "sistemin ne yapması gerektiği" sorusunun cevabıdır.
+
+### **Sayfa 11: Analiz İçeriği ve Tasarım Kavramı**
+*   **Özet:**
+    *   **Analiz içeriği:** Yazılım projelerinde gereksinim belirleme, veri akış modelleme ve dönüşüm mantığı kurgulamayı kapsar.
+    *   **Tasarım:** Belirlenen gereksinimleri karşılamak için yeni sistem planlama veya mevcut olanı değiştirme sürecidir. Temel odağı "sistemin amacına nasıl ulaşacağı"dır. Yazılımda mimari, veri tabanı ve insan-bilgisayar etkileşimi tasarımlarını içerir.
+
+### **Sayfa 12: Bütünleşik Yaklaşım**
+*   **Başlık:** Sistem Analizi ve Tasarımı.
+*   **Özet:** Bu süreç, kurumların veri akışını, işlemesini ve depolamasını anlamak için analistler tarafından kullanılan bütünleşik bir yaklaşımdır. Temel amaç sorunları belirleyip uygun çözümler üretmektir.
+
+### **Sayfa 13: Sürecin Önemi ve Riskler**
+*   **Özet:** Sistem analizi ve tasarımı; yazılım geliştirme, mühendislik ve proje yönetimiyle örtüşen yapısal bir yaklaşımdır. Analiz sürecine önem verilmeden doğrudan kodlamaya geçilmesi, ileride sorunların çözümü için çok daha fazla zaman ve efor harcanmasına neden olur. Analiz, olası zararları minimize etmek için zorunludur.
+
+### **Sayfa 14: Karar Verme ve Bilişim Sistemi**
+*   **Not:** Bu süreç maliyetleri düşürür ve başarıyı artırır.
+*   **Başlık:** Karar Verme Süreci ve Bilişim Sistemi İlişkisi.
+*   **Özet:** Bilişim sistemlerinin temel görevi yönetsel faaliyetlere analitik destek sağlamaktır.
+    *   **Karar:** Alternatifler arasından en yüksek faydayı sağlayanı seçmektir.
+
+### **Sayfa 15: Karar Vermede Bilişim Sisteminin Rolü**
+*   **Özet:** Bilişim sistemleri farklı departmanlar arası koordinasyonu sağlayarak karar çatışmalarını yönetir. Ancak bu sistemler sadece süreci **destekler**, kararı doğrudan oluşturamazlar. Karar; kişisel sezgi, içgüdü ve deneyimlerle şekillenir.
+
+### **Sayfa 16: Karar Türleri - Yapısal Kararlar**
+*   **Başlık:** Karar Seviyesi ve Türleri.
+*   **Özet:** Kararlar etki süresi ve karmaşıklığına göre 3'e ayrılır:
+    *   **Yapısal Kararlar:** Girdileri belirli, süreci bir algoritma ile formülize edilebilen rutin kararlardır. Örn: Standart ölçümler sonrası bakım kararı. "Programlanabilir karar" olarak da bilinir.
+
+### **Sayfa 17: Yarı Yapısal ve Yapısal Olmayan Kararlar**
+*   **Özet:**
+    *   **Yarı Yapısal Kararlar:** Formülize edilebilse de karar vericinin sezgi ve deneyiminin rol oynadığı, orta vadeli ve nadir tekrarlanan kararlardır. Başlangıç seviye yöneticilerce verilir.
+    *   **Yapısal Olmayan Kararlar:** Tepe yöneticilerin verdiği, uzun vadeli ve stratejik kararlardır. Yapılandırılmış bir durum yoktur; sezgiler kilittir (Örn: Tesis yeri seçimi). Analitik bilişim desteği şarttır.
+
+### **Sayfa 18: Karar Verme Seviyeleri - Stratejik Seviye**
+*   **Başlık:** Karar Verme Seviyeleri.
+*   **Özet:**
+    *   **Stratejik Seviye:** Kararlar seyrektir ve yıkıcı etkileri olabilir. Hızlı olmasından ziyade **isabetli** olması beklenir. En yüksek düzeyde analitik destek ve sezgisel değerlendirme bir aradadır.
+
+### **Sayfa 19: Operasyonel Seviye**
+*   **Özet:**
+    *   **Operasyonel Seviye:** Günlük faaliyetlerin yürütüldüğü, çekirdek aktivitelerle ilgili kısa vadeli kararlardır. Hız ve işlemsel mükemmellik odaklıdır. Kurallar ve iş akışlarıyla otomatikleştirilebilir (Örn: Stok kontrol, sipariş güncelleme).
+
+### **Sayfa 20: Taktik Seviye ve Vaka Analizi Başlangıcı**
+*   **Özet:**
+    *   **Taktik Seviye:** Orta seviye yöneticilerin bulunduğu, hızdan ziyade etkinliğe (isabet) odaklanan seviyedir. Departman değil firma bütününe odaklanır ve tepe yönetime rapor hazırlar.
+*   **Başlık: Ahmet Bey'in Kütüphanesi:** 30 yıllık, 5.000 kitaplık bir kütüphane örneği tanıtılır. Takip zorluğu ve kargaşa yaşanmaktadır.
+
+### **Sayfa 21: Ahmet Bey'in Kütüphanesi - Sistem Analizi**
+*   **Özet:** Ahmet Bey kütüphanesini bir sistem olarak görür:
+    *   **Amacı:** Kitap hizmeti sunmak ve okuma kültürünü desteklemek.
+    *   **Girdileri:** Okuyucular, yeni kitaplar, talepler.
+    *   **İşlemi:** Kayıt, raflama, ödünç verme ve iade alma.
+    *   **Çıktıları:** Memnun okuyucular, ödünç/iade edilen kitaplar.
+    *   **Eksiklik:** Geri bildirim alamaması (hangi kitap popüler vb.).
+
+### **Sayfa 22: Kütüphane Sistem Bileşenleri**
+*   **Başlık:** Ahmet Bey'in Kütüphanesi Sistem Bileşenleri ve Analizi.
+*   **Özet:**
+    *   **Sınır:** Fiziksel alan ve faaliyetler.
+    *   **Amacı:** Kitap hizmeti ve bilgiye erişim.
+    *   **Çevre:** Kadıköy sakinleri, yayınevleri, diğer kütüphaneler.
+    *   **Girdi:** Talepler, yeni kitaplar, üyelik başvuruları.
+    *   **İşlem:** Kataloglama, ödünç/iade süreçleri.
+
+### **Sayfa 23: Kütüphane Analizi (Devamı)**
+*   **Özet:**
+    *   **Çıktı:** Ödünç kitaplar, memnun okuyucular.
+    *   **Alt Sistemler:** Ödünç verme/alma ve temin/kataloglama süreçleri.
+    *   **Geri Bildirim:** Mevcut manuel sistemde bu alan eksiktir.
+*   **Sınıflandırma:** Kütüphane, dış çevreyle sürekli etkileşimde olduğu için bir **Açık Sistem** örneğidir.
+
+### **Sayfa 24: Teori ve Uygulama Karşılaştırması**
+*   **Başlık:** Ahmet Bey'in Kütüphanesi Teori ve Uygulama Karşılaştırması.
+*   **Özet:** Tablo üzerinden teorik tanımlar (Sınır, Amaç, Çevre) kütüphane örneğiyle eşleştirilir.
+
+### **Sayfa 25: Karşılaştırma (Devamı)**
+*   **Özet:** Tabloda Girdi, İşlem, Çıktı ve Alt Sistemler kütüphane bağlamında (talepler, kataloglama, memnun okuyucular vb.) örneklendirilir.
+
+### **Sayfa 26: Geri Bildirim ve Akış Diyagramı**
+*   **Özet:**
+    *   **Geri Bildirim:** Okuyucu yorumları ve kayıp raporları örnek verilir; popüler kitap verisinin eksikliği vurgulanır.
+*   **Başlık: Mevcut Durum Akış Diyagramı: Kargaşa ve Belirsizlik:** Manuel işleyişin (kitap arama, el yazısıyla kayıt vb.) sorun yarattığı diyagramla gösterilir.
+
+### **Sayfa 27: Problem Analizi (Takip Eksikliği)**
+*   **Başlık:** Ahmet Bey'in Kütüphanesi Problem Analizi ve Çözüm Önerileri.
+*   **1. Takip Edilebilirlik Eksikliği:** Manuel kayıt nedeniyle kitabın kimde olduğu ve iade tarihi net takip edilememekte, kayıplar oluşmaktadır.
+
+### **Sayfa 28: Veri Analizi ve Çözümler**
+*   **Özet:**
+    *   **Çözüm 1:** Barkod taranarak veri tabanına işlenen otomatik sistem.
+    *   **2. Veri Analizi Yoksunluğu:** Hangi türlerin okunduğu bilinmediği için yanlış kitap alım kararları verilmektedir.
+    *   **Çözüm 2:** Analitik görseller ve raporlar sunan karar destek yapısı.
+
+### **Sayfa 29: Verimlilik ve Veritabanı Tasarımı**
+*   **Özet:**
+    *   **3. Operasyonel Verimsizlik:** Süreçlerin zaman alıcı ve hataya açık olması.
+    *   **Çözüm 3:** Otomasyon yazılımları.
+*   **Başlık: DB Tasarımı:** Veritabanı yapısı (Kitap, Okuyucu, Ödünç tabloları) ile Primary Key (PK) ve Foreign Key (FK) ilişkileri şemada gösterilir.
+
+### **Sayfa 30: Modern Mimari - Fullstack Yaklaşımı**
+*   **Başlık:** Fullstack Sistem Analizi Bilişim Sistemlerinin Büyük Resmi.
+*   **Özet:** Modern yazılımın 3 katmanlı yapısı tanıtılır:
+    1.  **Database:** Verilerin saklandığı katman.
+    2.  **Backend:** İş kurallarının kontrol edildiği katman.
+    3.  **Frontend:** Kullanıcının gördüğü katman.
+*   **Örnek Senaryo:** Selim'in kitap ödünç alma isteğinin bu 3 katmanı nasıl harekete geçirdiği anlatılır.
+
+### **Sayfa 31: Veritabanı Kavramları**
+*   **Başlık:** Katman 1: Database (Veri Katmanı) Verilerin Saklandığı Yer.
+*   **Özet:** Bilgiler Excel'e benzer satır-sütun (tablo) yapısında saklanır.
+    *   **Tablo:** Veri organizasyon yapısı.
+    *   **Primary Key (PK):** Her kaydı benzersiz tanımlayan numara (Örn: kitap_id).
+
+### **Sayfa 32: İlişkiler ve Veri Bütünlüğü**
+*   **Özet:**
+    *   **Foreign Key (FK):** Başka tabloya referans vererek tablolar arası ilişki kurar.
+*   **Başlık: Database: Veri Bütünlüğü:** Kurallar açıklanır:
+    *   **Varlık Bütünlüğü:** PK boş olamaz, benzersiz olmalıdır.
+    *   **Referanssal Bütünlük:** FK var olan bir PK'yı göstermelidir (olmayan kitap ödünç verilemez).
+    *   **Alan Bütünlüğü:** Doğru veri tipleri (sayı, metin vb.) kullanılmalıdır.
+
+### **Sayfa 33: İş Kuralları ve Backend Giriş**
+*   **Özet:**
+    *   **İş Kuralları:** Mantıksal sınırlardır (Örn: ödünç limiti $\le 5$ kitap).
+*   **Başlık:** Katman 2: Backend (İş Mantığı) REST API ve HTTP Metodları.
+    *   **GET:** Veri okuma, **POST:** Yeni oluşturma, **PUT:** Güncelleme, **DELETE:** Silme.
+
+### **Sayfa 34: Backend Validasyon Süreci**
+*   **Başlık:** Backend: Validasyon Süreci 4 Kontrol Adımı.
+*   **Özet:** Backend sırayla şu kontrolleri yapar:
+    1. Kitap var mı? 2. Okuyucu kayıtlı mı? 3. Kitap müsait mi? 4. Limit aşıldı mı?.
+    *   Hepsi tamamsa kayıt oluşur, aksi halde hata döner.
+
+### **Sayfa 35: Frontend ve Kullanıcı Arayüzü**
+*   **Başlık:** Katman 3: Frontend (Kullanıcı Arayüzü) Selim'in Gördüğü Ekran.
+*   **Bileşenler:** Dropdown (seçim), Button (eylem), Tablo (liste), Alert (mesaj).
+*   **Bootstrap Framework:** Profesyonel görünüm sağlar.
+*   **Tam Süreç:** Selim butona basar $\rightarrow$ POST isteği gider $\rightarrow$ 4 doğrulama yapılır $\rightarrow$ INSERT ile kayıt oluşur.
+
+### **Sayfa 36: Mimari Özet ve Sonuç**
+*   **Başlık:** Büyük Resim: 3 Katman Birlikte Çalışır.
+*   **Özet:** Frontend (Arayüz), Backend (İş mantığı/Güvenlik) ve Database (Kalıcı depolama) arasındaki etkileşim özetlenir.
+*   **Sonuç:** Katmanlar birbirinden bağımsız ama birlikte güçlüdür; veri bütünlüğü ve iş kuralları bu sayede korunur.
+
+### **Sayfa 37: Logo ve Kapanış**
+*   **İçerik:** Yeditepe Üniversitesi logosu ve "Ahmet Bey'in Kütüphanesi" başlığı ile dosya sonlanır.
+
+***
+
+**Analoji:**
+Bu dosyada anlatılan sistem yapısını bir **restorana** benzetebiliriz: **Frontend**, müşterinin oturduğu, menüyü gördüğü ve garsona sipariş verdiği **yemek salonudur**. **Backend**, siparişin mutfağa iletildiği, malzemelerin kontrol edildiği ve yemeğin tarifine (iş kurallarına) göre pişirildiği **mutfaktır**. **Database** ise tüm malzemelerin ve tariflerin düzenli bir şekilde saklandığı **kilerdir**. Müşteri mutfaktaki karmaşayı görmez, sadece önüne gelen kaliteli hizmetle (çıktıyla) ilgilenir.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-index="2">
+                <div class="card-header">
+                    <div>
+                        Kutucuk 2
+                        <div class="card-sub">Kısa özet (2)</div>
+                    </div>
+                    <div class="arrow" aria-hidden></div>
+                </div>
+                <div class="card-content">
+                    <div class="note">
+                      "Bilişim Sistemleri Türleri" (2. Bölüm) dosyası (sayfa 107-139 arası), kurumsal yapıdaki bilişim sistemlerinin hiyerarşik, fonksiyonel ve entegre kategorilerini MiUP vakası ve genel teorik çerçevede detaylandırmaktadır. İşte sayfa sayfa tüm başlıkları ve bilgileri içeren kapsamlı özet:
+
+### **Sayfa 107: Bölüm Girişi**
+*   **Başlık:** 2. Bilişim Sistemleri Türleri - Giriş.
+*   **Özet:** Dijital dönüşümle birlikte firmaların her alanda bilişim sistemlerini kullandığı belirtilir. Sistem analizi çalışmalarının çoğunun bu kontrol ve destek sistemlerinin yenilenmesi için yapıldığı vurgulanır.
+*   **Alt Başlıklar:** Analiz ve tasarım öncesi sistemlerin kullanım alanlarının bilinmesi gerektiği not edilir.
+
+### **Sayfa 108: Sınıflandırma Kategorileri**
+*   **Özet:** Bilişim sistemleri üç ana başlıkta incelenir:
+    1.  **Hiyerarşik:** Karar seviyelerine göre.
+    2.  **Fonksiyonel:** Departman fonksiyonuna göre.
+    3.  **Entegre:** Kurum genelinde hem departman hem karar seviyelerini birleştiren sistemler.
+*   **Not:** İsimlerin kategori olduğu, firmaların aynı kategoride farklı isimli sistemler kullanabileceği (örneğin muhasebe ve depo için farklı hareket işleme sistemleri) belirtilir.
+
+### **Sayfa 109-110: Hiyerarşik Bilişim Sistemleri**
+*   **Başlık:** 2.1. Hiyerarşik Bilişim Sistemleri.
+*   **Özet:** Sistemler hiyerarşik olarak Operasyonel, Taktik ve Stratejik seviye kararları desteklemek üzere ayrılır.
+    *   **Yönetimsel Destek Sistemleri:** Daha çok orta (taktik) ve üst (stratejik) kademede bulunur.
+    *   **Bilgi Çalışanı Sistemleri:** İstisna olarak operasyonel seviyedeki beyaz yakalıların (mühendis, teknik çizimci) işlerini destekler.
+*   **Önem:** Operasyonel sistemler hem veri üretim merkezidir hem de müşteriye en yakın temas noktasıdır. Bu sistemler iş yapış şekillerindeki değişimlere en hızlı cevap veren (yeniliğe açık) yapılardır.
+
+### **Sayfa 111-112: Operasyonel Kontrol Sistemleri**
+*   **Başlık:** 2.1.1. Operasyonel Kontrol Sistemleri.
+*   **Alt Başlık 1: Bilgi Çalışan Sistemi (BÇS):** Teorik bilgiyi bütünleştiren orta düzey beyaz yakalıları destekler. Örnek: Mühendisler için CAD (bilgisayar destekli çizim) yazılımları veya programcılar için kodlama arayüzleri.
+*   **Alt Başlık 2: Ofis Otomasyon Sistemleri (OOS):** Çalışanlar arası iletişim ve işbirliğini sağlar. Word, Excel, PowerPoint gibi uygulamaların yanı sıra e-posta ve telekonferans sistemlerini de kapsar. Basitliği nedeniyle operasyonel seviyede sayılır.
+
+### **Sayfa 113-115: Hareket İşleme Sistemleri (HİS)**
+*   **Başlık:** Hareket İşleme Sistemleri (HİS).
+*   **Özet:** Müşteri hareketlerinin (örneğin markette barkod okutma) ilk kez dijitalleştiği sistemlerdir.
+*   **Görsel:** Şekil 2.11'de depo otomasyonu örneği; RFID okuyucu ile tırdan gelen malzemenin hızlıca sisteme aktarılması gösterilir.
+*   **Veri Yazma Stratejileri:**
+    1.  **Çevrimiçi (Online - OLTP):** Hareket anında gerçek zamanlı aktarılır (örneğin yazar kasa).
+    2.  **Yığın (Batch) İşleme:** Veriler internete bağlı olmayan cihazlarda toplanır ve belirli aralıklarla toplu aktarılır.
+
+### **Sayfa 116-118: Yönetimsel Destek Sistemleri (YDS)**
+*   **Başlık:** 2.1.2. Yönetimsel Destek Sistemleri.
+*   **Özet:** Karmaşık karar süreçlerine analitik ve görsel destek sağlar. Karar seviyesi yükseldikçe daha fazla dış veri odaklı çalışır.
+*   **Veri Ambarları (Data Warehouses):** Karar süreci karmaşıklaştığında veriyi işlemek için klasik veritabanları yerine analitik odaklı veri ambarları kullanılır.
+*   **Üst Yönetici Destek Sistemleri (ÜYDS):** Tepe yöneticilere stratejik kararlarda gösterge panelleri (dashboards) ile destek verir. Bu paneller dinamiktir, filtreler ile farklı boyutlarda (örneğin şube bazlı) sorgulama yapılabilir.
+
+### **Sayfa 119-121: Karar Destek Sistemleri (KDS)**
+*   **Başlık:** Karar Destek Sistemleri (KDS).
+*   **Ana Modüller:** Kullanıcı Arayüzü, Model Yönetim Sistemi (matematiksel modeller) ve Veri Yönetim Sistemi.
+*   **KDS Modelleri:**
+    *   **Eğer-İse Analizleri:** Farklı senaryolarda tahmin yapar.
+    *   **Optimizasyon:** Kısıtlı kaynakla en iyi sonucu bulur.
+    *   **Duyarlılık Analizi:** Modelin geçerli olduğu sınırları belirler.
+    *   **Amaç Arama:** Belirli bir hedefe ulaşmak için gereken girdileri bulur.
+*   **KDS vs YBS:** YBS (MIS) statiktir, tabular rapor sunar ve mevcut durumu gösterir; KDS ise dinamiktir, görseldir ve gelecek tahminlemesi yapar.
+
+### **Sayfa 122: Coğrafi Bilgi Sistemleri (CBS)**
+*   **Başlık:** Coğrafi Bilgi Sistemleri (CBS).
+*   **Özet:** Veriyi GPS koordinatlarına bağlayarak mekansal analiz yapar. Sosyal medya analizlerinde (Twitter gibi) coğrafi etiketleme ile pazarlama faaliyetlerini destekler.
+*   **Örnek:** Toyota'nın kritik tedarikçilerini gerçek zamanlı takip etmesi.
+
+### **Sayfa 123-125: Yönetim Bilişim Sistemleri (YBS) ve Raporlama**
+*   **Başlık:** Yönetim Bilişim Sistemleri (YBS).
+*   **Özet:** Sadece firma içi veriyi kullanır, yüksek analitik yeteneği yoktur. Tablolar halinde özet raporlar sunar.
+*   **Rapor Türleri:**
+    1.  **Planlı Periyodik Rapor:** Belirli zaman aralıklarında otomatik üretilir.
+    2.  **İstisna Raporları:** Kritik değerler (örneğin stokun 1000'in altına düşmesi) aşıldığında üretilir.
+    3.  **Talep Raporları:** Yöneticinin isteğiyle yeniden sorgu yazılarak oluşturulur.
+
+### **Sayfa 126-128: Fonksiyonel Bilişim Sistemleri**
+*   **Başlık:** 2.2. Fonksiyonel Bilişim Sistemleri.
+*   **Özet:** Üretim, İK, Finans ve Pazarlama gibi temel departmanların kaynaklarını (insan, para, hammadde, müşteri) yönetir.
+*   **Üretim Yönetimi Bilişim Sistemleri (ÜYBS):** Müşteri talebiyle başlar. Üretim çizelgeleme, rota belirleme, stok yönetimi, kalite kontrol ve kapasite planlama gibi işleri koordine eder.
+
+### **Sayfa 129: Satış ve Pazarlama Bilişim Sistemleri (SPBS)**
+*   **Başlık:** 2.2.2. Satış ve Pazarlama Bilişim Sistemleri (SPBS).
+*   **Özet:** Pazar ile firmanın senkronizasyonunu sağlar. Küreselleşme nedeniyle sadık müşteri kazanmanın zorluğu karşısında "müşteriyi elde tutma" faaliyetlerine odaklanır. İş zekası ve CRM bileşenlerini yoğun kullanır.
+*   **Kapsam:** Pazar araştırması, reklam yönetimi, marka yönetimi, satış gücü otomasyonu gibi faaliyetleri içerir.
+
+### **Sayfa 130-131: İnsan Kaynakları Bilgi Sistemi (İKBS)**
+*   **Başlık:** 2.2.3. İnsan Kaynakları Bilgi Sistemi (İKBS).
+*   **Özet:** İşletmenin en önemli kaynağı olan "insan"ı yönetir.
+*   **Fonksiyonlar:** İşe alım, eğitim, ücretlendirme, performans yönetimi, yetenek yönetimi ve personel yedekleme planlaması.
+
+### **Sayfa 132: Finans ve Muhasebe Bilişim Sistemleri (FBS-MBS)**
+*   **Başlık:** 2.2.4. Finans ve Muhasebe Bilişim Sistemleri (FBS-MBS).
+*   **Özet:** Finans nakit akışını koordine eder (bütçeleme, yatırım); Muhasebe ise bu akışı kayıt altına alır (envanter, alacak/borç hesapları).
+
+### **Sayfa 133-134: Entegre Bilişim Sistemleri**
+*   **Başlık:** 2.3. Entegre Bilişim Sistemleri.
+*   **Özet:** Bağımsız çalışan fonksiyonel sistemlerin yerine, modüler yapıda ve merkezi veritabanı ile gerçek zamanlı konuşan sistemlerdir.
+*   **Avantajı:** Süreçler arasındaki zaman kaymasını kaldırarak işletmeyi "çevik" yapar.
+*   **EDI (Elektronik Veri Değişimi):** Dış partnerlerle (tedarikçi, müşteri) yazılımların insan müdahalesi olmadan haberleşmesini sağlayan standarttır.
+
+### **Sayfa 135-136: Kurumsal Kaynak Planlaması (KKP/ERP)**
+*   **Başlık:** 2.3.1. Kurumsal Kaynak Planlaması (KKP).
+*   **Tarihsel Gelişim:** 1960'lar MRP (Malzeme) $\rightarrow$ 1980'ler MRP II (İmalat + Para/İnsan) $\rightarrow$ 1990'lar KKP (Tüm Fonksiyonlar).
+*   **Özet:** Verimliliği artırır, hatayı azaltır ve maliyetleri düşürür. Ancak kurulum süreci sancılıdır; "İşletme Süreçleri Yeniden Yapılandırılması (BPR)" gerektirir.
+
+### **Sayfa 137: Tedarik Zinciri Yönetimi (TZY)**
+*   **Başlık:** 2.3.2. Tedarik Zinciri Yönetimi (TZY).
+*   **Özet:** İlk tedarikçiden son müşteriye kadar tüm ağın koordinasyonudur. Boeing uçağının 6450 tedarikçiden gelen parçalarla yapılması örneğiyle karmaşıklık anlatılır.
+*   **Bileşenler:** GPS (konum takip), RFID (çip ile ürün bilgisi) ve EDI (haberleşme).
+
+### **Sayfa 138-139: MİY ve Bilgi Yönetimi Sistemi**
+*   **Başlık 1:** 2.3.3. Müşteri İlişkileri Yönetimi (MİY/CRM).
+*   **Özet:** Müşteri memnuniyeti odaklıdır. **Operasyonel MİY** (iletişim, e-posta) ve **Analitik MİY** (müşteri segmentasyonu, kampanya tasarımı) olarak ikiye ayrılır.
+*   **Başlık 2:** 2.3.4. Bilgi Yönetimi Sistemi (BYS).
+*   **Uzman Sistemler (US):** Yapay zeka kullanarak uzman kararlarını bilgi tabanına aktarır. Yeni yöneticiler için sanal asistan gibi çalışır.
+
+***
+
+**Analoji:**
+Bilişim sistemi türlerini bir **orduya** benzetebiliriz: **Operasyonel Kontrol Sistemleri**, sahadaki her bir askerin anlık durumudur (en temel veri kaynağı). **YBS/MIS**, komutanlara her sabah verilen "cephane ve personel sayısı" gibi özet raporlardır. **KDS/DSS**, "Eğer hava bozarsa saldırı planımız ne olmalı?" diye soran bir strateji masasıdır. **Entegre Sistemler (ERP)** ise ordunun lojistiğinden istihbaratına kadar her birimin birbiriyle telsiz (EDI) aracılığıyla kusursuz bir uyum içinde çalışmasıdır.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-index="3">
+                <div class="card-header">
+                    <div>
+                        Kutucuk 3
+                        <div class="card-sub">Kısa özet (3)</div>
+                    </div>
+                    <div class="arrow" aria-hidden></div>
+                </div>
+                <div class="card-content">
+                    <div class="note">
+                        "Bilişim Sistemi Geliştirme" (3. Bölüm) dosyası (sayfa 83-106), yazılım geliştirme süreçlerini, kullanılan metodolojileri ve bu süreçlerin yönetimsel boyutlarını MiUP vakası ve genel teorik yaklaşımlar üzerinden detaylandırmaktadır. İşte sayfa sayfa kapsamlı özeti:
+
+### **Sayfa 83: Bölüm Girişi**
+*   **Ana Başlık:** 3. Bilişim Sistemi Geliştirme.
+*   **Özet:** Bilişim sistemi geliştirmenin; hizmet verilecek kitle, hız gereksinimi, maliyet ve gereksinimlerin toplanabilirliği gibi kritik faktörlere bağlı olduğu belirtilir. Bu faktörlerin yazılım mühendislerini farklı metodolojiler kullanmaya yönelttiği ve bu bölümde bu modellerin hangi koşullarda tercih edileceği anlatılmaktadır.
+
+### **Sayfa 84: Sistem Geliştirmeye Giriş**
+*   **Alt Başlık:** 3.1. Sistem Geliştirmeye Giriş.
+*   **Özet:** Yazılım geliştirme projelerinde analize önem vermeden doğrudan kodlamaya başlamanın başarısızlık getirdiği vurgulanır. Başarılı bir süreç için şu soruların sorulması gerektiği belirtilir:
+    *   Yazılım geliştirmeye gerçekten ihtiyaç var mı?
+    *   Yazılım neleri içermeli ve hangi fonksiyonlara sahip olmalı?
+    *   Kullanıcılar kimler ve beklentileri nelerdir?
+    *   Süre ve maliyet kısıtları nelerdir?
+    *   Gerekli teknoloji ve insan kaynağı mevcut mu?
+
+### **Sayfa 85: Metodoloji İhtiyacı ve SGYÇ**
+*   **Özet:** Soruların cevaplarının belirli bir sistematik ve metodoloji ile (paralel veya seri bağlı işlemlerle) yönetilmesinin kaçınılmaz olduğu ifade edilir.
+*   **Alt Başlık:** 3.2. Sistem Geliştirme Yaşam Çevrimi (SGYÇ).
+*   **Özet:** Sürecin yönetimini standartlaştırmak için kullanılan temel yapısal metodoloji olan SGYÇ tanıtılır. Şemada gösterilen 4 temel aşama şunlardır: **Planlama, Analiz, Tasarım ve Uygulama**.
+
+### **Sayfa 86: SGYÇ Aşamaları ve Çapraz İş Süreçleri**
+*   **Özet:** SGYÇ'nin adımları şu şekilde detaylandırılır:
+    *   **Planlama:** İşin anlaşılması ve planlanması.
+    *   **Analiz:** Gereksinimlerin alt parçalara ayrılarak incelenmesi.
+    *   **Tasarım:** Analiz sonuçlarının ayrıntılı mimariye dönüştürülmesi.
+    *   **Uygulama:** Tasarımların operasyonel bir yazılıma dönüştürülmesi.
+*   **Önemli Not:** SGYÇ bir "standart" değil, bir "kılavuz"dur. Ayrıca süreç boyunca devam eden **Çapraz İş Süreçleri** (bilgi toplama, dokümantasyon, tahminleme, fizibilite ve proje yönetimi) tanımlanır.
+
+### **Sayfa 87: Planlama Aşaması**
+*   **Alt Başlık:** 3.2.1. Planlama.
+*   **Görsel:** Şekil 3.1'de SGYÇ aşamaları; Şekil 6.2'de Planlama adımları (Proje seçimi, Fizibilite, Çizelgeleme, Risk Analizi) gösterilir.
+*   **Özet:** Planlama, bir problemin (iyileştirme veya yeni tasarım) tanımlanmasıyla (sistem talebi) başlar ve proje yönetimi ilkeleriyle yürütülür.
+
+### **Sayfa 88: Proje Seçimi ve Beyan**
+*   **Özet:** Birden fazla talep varsa seçim yapılır. Projeler sezgisel veya sayısal (ön fizibilite raporları) yöntemlerle değerlendirilerek "Proje Beyanı"na (Charter) dönüştürülür. Beyan; fırsatları, başlangıç gereksinimlerini, zaman/bütçe kısıtlarını ve ekibi içerir. Süreç, kilometre taşlarının belirlenmesi ve risk analiziyle biter.
+
+### **Sayfa 89: Analiz Aşaması**
+*   **Alt Başlık:** 3.2.2. Analiz.
+*   **Özet:** İlk adım son kullanıcılardan **gereksinim toplanmasıdır** (anket, mülakat, gözlem vb.). Ardından gereksinimlerin yazılım fonksiyonlarına dönüştürüldüğü "Süreç Modelleri" (algoritmalar) oluşturulur.
+
+### **Sayfa 90: Veri ve Mantık Modelleme**
+*   **Özet:** **Veri Akış Diyagramları (VAD)** ile dolaşan veriler yapısal olarak listelenir. Süreçlerin veriyi nasıl alıp işleyeceği "Mantık Modelleri" ile belirlenir.
+*   **Görsel:** Şekil 3.3'te Analiz adımları (Gereksinim Analizi -> Süreç Modelleme -> Veri Modelleme -> Mantık Modelleme) sıralanır.
+
+### **Sayfa 91: Tasarım Aşaması**
+*   **Alt Başlık:** 3.2.3. Tasarım.
+*   **Özet:** Analiz sonrası belirlenen fonksiyonlar için üç aşamalı altyapı kurulur:
+    1.  **Mimari Tasarım:** Sistemin genel yapısı ve bileşenler arası ilişkiler.
+    2.  **Veri Tabanı Tasarımı:** Verilerin kavramsal, mantıksal ve fiziksel olarak düzenlenmesi.
+    3.  **İnsan-Bilgisayar Etkileşimi:** Girdi, çıktı ve kullanıcı etkileşiminin dizaynı.
+
+### **Sayfa 92: Uygulama Aşaması**
+*   **Alt Başlık:** 3.2.4. Uygulama.
+*   **Özet:** Donanımların oluşturulması, yazılımların kurulması ve kodlama işlemini kapsar. Süreç kayıt altına alınır. Kullanıcıya sunulmadan önce **Birim, Entegrasyon, Sistem ve Kabul testleri** yapılır. Kurulum sonrası eğitim, destek ve bakım planları devreye alınır.
+
+### **Sayfa 93: Sistem Geliştirme Metodolojileri**
+*   **Alt Başlık:** 3.3. Sistem Geliştirme Metodolojileri.
+*   **Özet:** Metodolojiler, SGYÇ'nin hangi araçlarla nasıl sürdürüleceğini açıklar; aktiviteleri, sorumlulukları ve kalite standartlarını içerir. Şirketler riskleri azaltmak için test edilmiş metodolojileri seçer. Modeller; **Yapısal, Hızlı Uygulama Geliştirme (HUG) ve Çevik Yöntemler** olarak üçe ayrılır.
+
+### **Sayfa 94: Şelale Modeli (Waterfall)**
+*   **Alt Başlık:** 3.3.1. Yapısal Metodolojiler - Şelale Modeli.
+*   **Özet:** Adımların birbirinden ayrı olduğu, birinin bitip diğerinin başladığı seri yapıdır. Gereksinimlerin baştan net olduğu, kritik kurumsal süreçler veya eski sistemlerin yenilenmesi projeleri için idealdir. Kilometre taşları belli olduğu için süreç görünürlüğü yüksektir.
+
+### **Sayfa 95: Yapısal Metodolojilerin Özellikleri**
+*   **Özet:** Bu yöntemlerde adımların çıktıları önceden bellidir. Şelale modeli, diğer yapısal metodolojilerin (V-Model, Spiral vb.) temel varyantıdır.
+
+### **Sayfa 96: Şelale Modelinin Avantaj ve Dezavantajları**
+*   **Özet:** Takibinin kolay ve şeffaf olması büyük projelerde avantaj sağlar. Ancak gerçek hayatta işlerin ardışık gitmemesi, maliyet/zaman kısıtları ve değişen müşteri ihtiyaçları şelale modelini esnek olmayan projeler için zorlaştırır. Pazara sürülecek dinamik yazılımlar için uygun değildir.
+
+### **Sayfa 97: Spiral Model**
+*   **Alt Başlık:** Spiral Model.
+*   **Özet:** Şelale modelinin tekrarlı (iteratif) bir versiyonudur; her döngü sonunda daha işlevsel bir prototip üretilir. Her spiral 4 adımdan oluşur: Amaç belirleme, Risk analizi, Geliştirme/Test ve Planlama.
+
+### **Sayfa 98: Spiral Modelin Değerlendirmesi**
+*   **Özet:** Gereksinimlerin süreç içinde değişmesine izin verdiği için son ürün riski düşüktür. Ancak yoğun prototipleme nedeniyle maliyetli ve uzundur; kilometre taşlarını belirlemek zor olduğu için denetimi düşüktür.
+
+### **Sayfa 99: B Modeli ve Hızlı Uygulama Geliştirme (HUG)**
+*   **Alt Başlık:** B Modeli.
+*   **Özet:** Şelale modelinin bakım aşamasındaki eksikliğini gidermek için tasarlanmıştır; sistemdeki her değişikliği ayrı bir alt proje (analiz, tasarım vb.) olarak ele alır.
+*   **Alt Başlık:** 3.3.2. Hızlı Uygulama Geliştirme (RAD/HUG).
+*   **Özet:** Uzun planlama yerine analiz ve tasarım süreçlerine odaklanarak yazılımı en kısa sürede kullanıcıya sunmayı amaçlar.
+
+### **Sayfa 100: HUG Aşamaları**
+*   **Özet:** 4 adımdan oluşur:
+    1.  **Gereksinim Planlaması:** İşletme odaklı çalıştaylar.
+    2.  **Kullanıcı Odaklı Tasarım:** Bilgisayar destekli (CASE/BDT) araçlarla veri çekme.
+    3.  **Yapım:** Tasarım ve kodlamanın paralel yürüdüğü, prototiplerin kullanıldığı aşama.
+    4.  **Uygulamaya Geçiş:** Kabul testi ve eğitim.
+*   **Not:** Zamanın kısıtlı ve hızın yüksek performanstan daha önemli olduğu projelerde tercih edilir.
+
+### **Sayfa 101: Prototipleme ve Evrimsel Süreç**
+*   **Özet:** Prototipleme HUG için kritiktir. **Sistem Prototipleme (Evrimsel):** Kısa planlama sonrası analiz, tasarım ve uygulama birlikte yürütülerek prototip sürekli geliştirilir ve müşteriye sunulur.
+
+### **Sayfa 102: Tasarım Prototipleme**
+*   **Alt Başlık:** Tasarım Prototipleme.
+*   **Özet:** Bu modelde prototip sadece gereksinim toplamak için kullanılır; operasyonel olma zorunluluğu yoktur ("Kullan-At" mantığı).
+
+### **Sayfa 103: Tasarım Prototipleme İşleyişi**
+*   **Özet:** Temel analiz sonrası hızlıca işlevsel olmayan taslaklar üretilir ve kullanıcı geri bildirimi alınır. Gereksinimler netleşince, prototip üzerine inşa etmek yerine yepyeni bir sistem hazırlanır.
+
+### **Sayfa 104: Aşamalı (İteratif) Geliştirme**
+*   **Alt Başlık:** Aşamalı (İteratif) Geliştirme.
+*   **Özet:** Başlangıçta net ve sınırlı gereksinimlerle çalışabilir bir sürüm (versiyon) şelale mantığıyla tasarlanıp sunulur. Eksiklikler sonraki sürümlerde giderilir; prototipleme değil, ilk andan itibaren gerçek kullanım hedeflenir.
+
+### **Sayfa 105: İteratif ve Artırımlı Model Farkı**
+*   **Özet:** **Aşamalı (İteratif) Modelde** her sürüm tüm fonksiyonları belli sınırlarda içerir. **Artırımlı (Incremental) Modelde** ise temel bir versiyona her yeni sürümde yepyeni ve daha önce olmayan bir fonksiyon eklenerek sistem genişletilir.
+
+### **Sayfa 106: Kademeli Geliştirme (Artırımlı Model)**
+*   **Alt Başlık:** Kademeli Geliştirme (Artırımlı Model).
+*   **Özet:** Şekil 3.12'de artırımlı modelin yapısı gösterilir. Bu modelin paralel geliştirme ve aşamalı modellerle karıştırılmaması gerektiği, ara sürümlerin mahiyetinin farklı olduğu not edilir.
+
+***
+
+**Analoji:**
+Sistem geliştirme metodolojilerini bir **yemek yapma sürecine** benzetebiliriz:
+*   **Şelale Modeli:** Tüm malzemeleri baştan alıp, tarifin her adımını sırayla (biri bitmeden diğerine geçmeden) yapıp yemeği en son sofraya koymaktır.
+*   **Spiral Modeli:** Önce yemeğin bir tadına bakıp (prototip), eksiklerini belirleyip tekrar ocağa koymak ve her döngüde lezzeti artırmaktır.
+*   **HUG (Hızlı Uygulama):** Aç olan müşteriye en hızlı şekilde (belki önce başlangıç tabağını sunarak) bir şeyler servis etmek ve o yerken ana yemeği hazırlamaktır.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-index="4">
+                <div class="card-header">
+                    <div>
+                        Kutucuk 4
+                        <div class="card-sub">Kısa özet (4)</div>
+                    </div>
+                    <div class="arrow" aria-hidden></div>
+                </div>
+                <div class="card-content">
+                    <div class="note">
+                        "Çevik Sistem Analizi ve Tasarımı" (4. Bölüm) dosyası (sayfa 140-164 arası), günümüzün dinamik piyasa koşullarında yazılım geliştirme süreçlerini hızlandıran ve değişimi yöneten yaklaşımları MiUP vakası ve teorik modellerle detaylandırmaktadır. İşte sayfa sayfa kapsamlı özeti:
+
+### **Sayfa 140: Çevik Kavramına Giriş**
+*   **Ana Başlık:** 4. Çevik Sistem Analizi ve Tasarımı.
+*   **Alt Başlık:** 4.1. Çevik Kavramı.
+*   **Özet:** Dinamik piyasa koşullarında hızın hayatta kalmak için kilit rol oynadığı belirtilir. Müşteri gereksinimlerinin sürekli yenilenmesi nedeniyle "değişim yönetimi" ön plana çıkar. Çevik metodolojiler hem hız kazandırır hem de bu değişimleri iyi yönetir. Temel amaç, müşteri gereksinimlerini en kısa sürede ve en düşük maliyetle karşılamaktır.
+
+### **Sayfa 141: Çevik vs. Yapısal Yaklaşımlar**
+*   **Özet:** Çevik yöntemler, çalışan bir yazılım kopyasını hızlıca hazırlamak için Planlama gibi Sistem Geliştirme Yaşam Çevrimi (SGYÇ) aşamalarını baypas eden metodolojilerin genel adıdır. Yapısal metotlar analizden önce gereksinimlerin tamamen toplanmasını ve bir proje beyanı (charter) oluşturulmasını şart koşar. Çeviklikte bu adımlar süreç içerisindeki diğer aktivitelerle birlikte halledilir. Şekil 4.1'e göre, planlama tabanlılarda gereksinim listesi bitmeden tasarıma geçilmez; bu durum zaman kaybına yol açarak projeyi daha başlamadan başarısızlığa sürükleyebilir.
+
+### **Sayfa 142-143: Yalınlık, Değer ve Paydaş İletişimi**
+*   **Özet:** Çeviklik, "yalın üretim" (lean production) felsefesinden doğmuştur. Yalınlık, ürüne değer katmayan (israf) her türlü faaliyetin arındırılmasıdır; değer ise müşterinin ek ücret ödemeye razı olduğu unsurdur. Çeviklik, planlamayı bertaraf etmez, sadece sürece yayar.
+*   **İletişim:** Tüm paydaşların aynı dili konuşması kritiktir. Şekil 4.3'teki "Ağaçtaki Salıncak" örneği, müşteri talebi ile analist, programcı ve yönetici arasındaki iletişim kopukluklarının projeyi nasıl yanlış yönlendirdiğini mizahi bir dille gösterir.
+
+### **Sayfa 144-145: Çevik Yöntemlerin Faydaları ve Başarı Oranları**
+*   **Faydalar:** Paydaşlar arası iletişim boşluğunu azaltır, müşteri katılımını artırır, dokümantasyon karmaşasını ve kapsam kaymasını önler. Toplam proje süresini düşürerek son ürünün kabul görme ihtimalini artırır.
+*   **İstatistikler:** Belirsizliğin yüksek olduğu projelerde çeviklik kaçınılmazdır. Şekil 4.5'e göre bilişim projelerinin %49'u zaman/bütçe aşımı yaşarken, sadece %28'i tam başarıya ulaşır; %23'ü ise iptal edilir. Rekabet, değişen profiller ve teknolojik adaptasyon zorlukları başarısızlığın nedenleridir.
+
+### **Sayfa 146: Çevik Manifestonun 12 Prensibi**
+*   **Alt Başlık:** 4.2. Değerler ve Prensipler.
+*   **Özet:** Çevik manifestoda 4 değer ve 12 prensip bulunur. Temel odak; müşteri memnuniyeti, erken/sürekli teslimat ve değişen gereksinimleri kucaklamaktır. Yazılım ve geliştiricilerin çalışma ortamı, dokümantasyondan daha önceliklidir.
+*   **Bazı Prensipler:** Motive bireylere güvenmek, yüz yüze iletişim kurmak, çalışan yazılımı tek başarı ölçütü saymak ve sürdürülebilir hızı korumaktır.
+
+### **Sayfa 147-148: Scrum Metodolojisine Giriş**
+*   **Alt Başlık:** 4.3. Çevik Metotlar - 4.3.1. Scrum.
+*   **Özet:** En sık kullanılan çevik modeller Scrum ve Ekstrem Programlama'dır. Scrum ismi, ragbi sporundaki takımın bir bütün halinde hareket etmesinden gelir. Scrum, takımı yaparak öğrenmeye ve kendi kendini organize etmeye teşvik eden bir çerçevedir. Bir geliştirme metodolojisinden ziyade bir "proje yönetim" yaklaşımıdır. Toplantılar ve belirli aktivite zamanları ile yapısal bir görünüm sunar.
+
+### **Sayfa 149: Scrum Rolleri**
+*   **Özet:** Scrum'da dört temel rol vardır:
+    1.  **Ürün Sahibi (Product Owner):** Müşteri çıkarlarını temsil eder, gereksinim listelerini yönetir.
+    2.  **Geliştirme Takımı:** 5-9 kişilik, hiyerarşisiz, kendi kendini organize eden gruptur.
+    3.  **Scrum Ustası (Scrum Master):** Süreç kolaylaştırıcıdır, lider değil koçtur; ekibi dış müdahalelerden korur.
+    4.  **Paydaşlar:** Gelecekteki kullanıcılar veya yöneticilerdir; sprint sırasında ekiple doğrudan iletişim kurmazlar.
+
+### **Sayfa 150-151-152: Scrum Süreçleri ve Sprint**
+*   **Bileşenler:**
+    *   **Kullanıcı Senaryoları (User Stories):** Gereksinimlerin hikayelerle anlatılmasıdır.
+    *   **Ürün İş Listesi:** Dinamik ve öncelikli gereksinimlerin toplandığı listedir.
+    *   **Sprint Planlama:** İş listesinden seçilenlerin bir sprinte (2-4 haftalık döngü) dönüştürüldüğü tek planlama aşamasıdır.
+    *   **Sprint İş Listesi:** Sprint boyunca değişmeyen gereksinim kümesidir.
+    *   **Günlük Scrum:** 15 dakikalık, "Dün ne yapıldı? Bugün ne yapılacak?" sorularının sorulduğu toplantılardır.
+
+### **Sayfa 153-154-155: İzleme, Değerlendirme ve İyileştirme**
+*   **Özet:**
+    *   **Açılış Grafikleri (Burn Down/Up):** Projenin gidişatını ve kapsam değişimlerini görselleştirir.
+    *   **Ürün Parçası:** Her sprint sonunda ortaya çıkan işlevsel yazılım parçasıdır.
+    *   **Sprint Değerlendirme:** Paydaşlara çalışan yazılımın sunulması ve geri bildirim alınmasıdır.
+    *   **Sprint Retrospektif:** Önceki sprintin nasıl gittiğinin tartışıldığı ve süreç iyileştirme eylemlerinin belirlendiği toplantıdır.
+
+### **Sayfa 156-157: Ekstrem Programlama (XP) Değerleri**
+*   **Alt Başlık:** 4.3.2. Ekstrem Programlama (XP).
+*   **Özet:** Küçük parçalar halinde aşamalı teslimatı öngörür. 5 temel değeri vardır:
+    1.  **İletişim:** Günlük toplantılarla sorunların derhal ele alınması.
+    2.  **Sadelik:** "Ona ihtiyacın olmayacak" (YAGNI) ilkesi ile yalın kod tasarımı.
+    3.  **Geri Bildirim:** 1-3 haftalık sürümlerle hızlı iyileştirme.
+    4.  **Saygı:** Kodun ve tasarımın ortak mülkiyeti ve sorumluluğu.
+    5.  **Cesaret:** Gereksiz olanı bırakma ve kodu yeniden düzenleme inisiyatifi.
+
+### **Sayfa 158-159: XP Planlama ve Tasarım**
+*   **Planlama:** "Planlama oyunu" ile başlar; müşteri kullanıcı hikayelerini kartlara yazar ve ekip bunları skorlar. İlk sürümden sonra "proje hızı" (velocity) hesaplanarak sonraki tarihler tahmin edilir.
+*   **Tasarım:** "Basit Tut" (KIS) ilkesine odaklanır. Karmaşık bölümler için sadece o alana özel işlevsel prototipler üretilir.
+
+### **Sayfa 160-161: XP Kodlama ve Test Etme**
+*   **Kodlama:** Kod yazılmadan önce "birim testler" geliştirilir; bu sayede programcı neyi geçmesi gerektiğine odaklanır.
+*   **Eşli Programlama:** İki kişinin bir bilgisayarda çalışarak gerçek zamanlı problem çözmesi ve kalite güvencesi sağlamasıdır. Sürekli entegrasyon ve yeniden düzenleme (refactoring) yapılır.
+*   **Test Etme:** Test, yapım sürecine entegredir; birim testleri ve müşteri kabul testlerini kapsar.
+
+### **Sayfa 162-163-164: Metodolojilerin Karşılaştırılması**
+*   **Alt Başlık:** 4.4. Sistem Geliştirme Yaklaşımlarının Karşılaştırılması.
+*   **Kriterler:** 6 temel seçme kriteri üzerinden modeller kıyaslanır.
+    *   **Net Olmayan Gereksinimler:** Yapısal modeller (Spiral hariç) başarısızdır; çevik yöntemler ve prototipleme en iyisidir.
+    *   **Farklı Teknoloji Gereksinimi:** Tasarım prototipleri teknolojik değişime en hızlı tepkiyi verirken, yapısal modeller zorlanır.
+*   **Karşılaştırma Tablosu (Sayfa 164):** Şelale, Spiral, b Modeli, Prototipleme, Aşamalı/Kademeli Geliştirme, Scrum ve XP; belirsizlik, zaman kısıtı, risk ve çizelge görünürlüğü açısından puanlanmıştır.
+
+***
+
+**Analoji:**
+Sistem geliştirme metodolojilerini bir **ev tadilatına** benzetebiliriz:
+*   **Şelale Modeli:** Boyasından musluğuna kadar her şeyi en başta seçip, ustaların her şeyi sırayla (biri bitmeden diğeri başlamadan) yapıp anahtarı size en son teslim etmesidir.
+*   **Çevik Yöntemler (Scrum/XP):** Önce en acil ihtiyacınız olan mutfağı yapıp orayı kullanmaya başlamanız, o sırada salonun rengine veya banyonun fayansına (süreç içinde geri bildirimle) karar verip adım adım evi yaşanır hale getirmenizdir. Belirsizliği, yaşayarak ve deneyerek çözersiniz.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-index="5">
+                <div class="card-header">
+                    <div>
+                        Kutucuk 5
+                        <div class="card-sub">Kısa özet (5)</div>
+                    </div>
+                    <div class="arrow" aria-hidden></div>
+                </div>
+                <div class="card-content">
+                    <div class="note">
+                        "Bilişim Projelerinin Başlatılması" adlı ikinci dosyanın (sayfa 38 ile 82 arası) her bir sayfasındaki başlıklar ve tüm bilgilerin detaylı özeti aşağıdadır:
+
+### **Sayfa 38: Proje Kavramı ve Tanımı**
+*   **Başlık:** 5.1. Proje Kavramı.
+*   **Özet:** PMI (Project Management Institute) projeyi; benzersiz, özgün bir ürün veya hizmet üretmek için yürütülen **geçici (başlangıcı ve sonu belli)** faaliyetler bütünü olarak tanımlar.
+*   **Detay:** Projeler rutin işlerden farklıdır; örneğin günlük not tutmak rutin bir işken, sadece bir kez hazırlanan dönem ödevi bir projedir.
+
+### **Sayfa 39: Proje Kaynakları ve Kapsam**
+*   **Özet:** Projeler; **Kapsam, Maliyet ve Zaman** olmak üzere üç temel kaynağın koordinasyonuyla kaliteli bir son ürüne ulaşmayı hedefler.
+*   **Alt Başlık: 1. Kapsam:** Projenin temel konusunu ve içeriğini ifade eder; müşteri ve ekip arasında üzerinde anlaşılan gereksinimlere uygun hazırlanan plandır. En temel ölçütü, faaliyetlerin gereksinimleri karşılama derecesidir.
+
+### **Sayfa 40: Zaman ve Maliyet Kaynakları**
+*   **Alt Başlık: 2. Zaman:** Projenin mümkün olan en kısa sürede tamamlanması beklenir; doğru zamanda teslim edilmeyen ürünün bir yararı yoktur.
+*   **Alt Başlık: 3. Maliyet:** Proje için gereken maaşlar, donanım ve yazılım maliyetlerini kapsayan maddi kaynaklardır. Proje yöneticisi bütçeyi izlemek ve düzeltici önlemler almak zorundadır.
+
+### **Sayfa 41: Projelerin Temel Özellikleri**
+*   **Özet:** Her projenin şu özellikleri taşıması beklenir:
+    *   Benzersiz bir amacı vardır.
+    *   Geçicidir (başlangıç ve sonu bellidir).
+    *   Belirli bir ihtiyaca dayanır ve değer yaratır.
+    *   Bir plan dahilinde tasarlanır.
+    *   Departman sınırlarını aşan kaynak yönetimi gerektirir.
+    *   Bir yöneticisi olmalıdır.
+    *   **Belirsizlik** içerir (maliyet ve süre tahminleri zordur).
+
+### **Sayfa 42: Proje Yönetimi ve Başarısızlık Faktörleri**
+*   **Özet:** Proje yönetimi, gereksinimleri karşılamak için bilgi ve becerilerin faaliyetlere uygulanmasıdır.
+*   **Yazılım Projelerinin Farkı:** Ürün soyut ve çok esnek olduğu için başarısızlık ihtimali daha yüksektir.
+*   **Başarısızlık Nedenleri:** İnsan, Süreç, Teknoloji ve Organizasyon kaynaklı olmak üzere dört ana grupta toplanır.
+
+### **Sayfa 43: Başarısızlık Grafiği ve Standartlar**
+*   **Görsel:** Şekil 5.2'de kötü planlama, yetersiz deneyim, eski teknolojiler ve bürokrasi gibi başarısızlık nedenleri şemalandırılmıştır.
+*   **Alt Başlık: 5.2.1. Proje Yönetim Standartları:** Başarı için PMP, PRINCE II ve IPMA gibi sertifikalı yöneticilerin tercih edilmesi bir trenddir.
+
+### **Sayfa 44: PMP ve Bilgi Alanları Giriş**
+*   **Özet:** **PMP (Project Management Professional)**, PMI tarafından verilen ve temel kaynağı **PMBOK** olan en yaygın sertifikasyondur.
+*   **10 Bilgi Alanı:** Entegrasyon, Kapsam, Zaman, Maliyet, Kalite, İK, İletişim, Risk, Satınalma ve Paydaş yönetimi süreçlerini kapsar.
+
+### **Sayfa 45: PMP Bilgi Alanları Detayı**
+*   **Özet:** Bilgi alanlarının görevleri açıklanır:
+    *   **Entegrasyon:** Planın geliştirilmesi ve değişiklik kontrolü.
+    *   **İK:** Ekip oluşturma ve davranışsal yönetim.
+    *   **İletişim:** Zamanında ve doğru bilgi iletimi.
+    *   **Risk:** Riskleri belirleme ve yanıtlama.
+    *   **Satınalma:** Dış kaynak tedariği.
+    *   **Paydaş:** Beklentileri anlama ve çatışma yönetimi.
+
+### **Sayfa 46-47: Proje Başlatma Aşamaları**
+*   **Başlık:** 5.3. Proje Başlatma.
+*   **Özet:** Süreç 4 adımdan oluşur: **Sistem İsteği, Ön Değerlendirme, Proje Seçimi ve Proje Beyanı**.
+*   **Süreç Tanımı:** Sistem istekleri genelde kısıt bağımsız hazırlanır, ön değerlendirme ve seçimden sonra proje beyanı ile planlama öncesi son adım atılır.
+
+### **Sayfa 48: Sistem İsteği Türleri (1-3)**
+*   **Alt Başlık: 5.3.1. Sistem İsteği:** Talep firma içinden veya müşteriden gelir.
+    1.  **Mevcut Sistemin Geliştirilmesi:** Özelliklerin genişletilmesi (uzun planlama gerektirir).
+    2.  **Sorun Düzeltme:** Hataların veya ölçeklenme sorunlarının giderilmesi.
+    3.  **Eski Sistemin Değiştirilmesi:** İşlevini yitiren sistemin yenilenmesi.
+
+### **Sayfa 49-50: Yeni Sistem İsteği ve Talep Belirleme**
+*   **Özet:**
+    4.  **Yeni Bilişim Sistemi Geliştirme:** Tamamen yeni gereksinimler için yapısal teknikler kullanılır.
+*   **Talep Belirleme Yöntemleri:** Çıktı performans kriterleri (hata, hız), çalışan davranışları ve harici geri bildirimler (müşteri/tedarikçi) analiz edilir.
+
+### **Sayfa 51: MiUP Projesi Giriş**
+*   **Özet:** **MiUP (Mesleki İşyeri Uygulama Platformu)** vaka çalışması tanıtılır.
+*   **Amaç:** Mesleki eğitimdeki manuel süreçleri dijitalleştirmek; yapay zeka destekli ve bulut tabanlı bir platform oluşturmaktır.
+
+### **Sayfa 52: Ön Değerlendirme Süreci**
+*   **Alt Başlık: 5.3.2. Ön Değerlendirme:** Gelen isteklerin yapılamayacak olanlarının elenmesi sürecidir.
+*   **Kriterler:** Ekonomik, teknik, operasyonel, yasal, çizelge ve organizasyonel yapılabilirlik sorgulanır.
+
+### **Sayfa 53: MiUP Ön Değerlendirme Soruları**
+*   **Özet:** MiUP için fiziksel/maddi kaynaklar, altyapı, uzman personel, zaman, yasal durum (KVKK) ve organizasyonel dirençle ilgili 7 kritik soru sorulur.
+
+### **Sayfa 54-55: MiUP Ön Değerlendirme Cevapları ve Karar**
+*   **Sonuç:** Firma kaynaklarını yeterli bulmuş, uzman personel için geçici istihdam planlamış ve 8 aylık süreyi kabul edilebilir görmüştür. Ciddi bir engel görülmediği için projenin **Seçme Aşamasına** geçmesine karar verilmiştir.
+
+### **Sayfa 56: Proje Seçme Teknikleri Giriş**
+*   **Alt Başlık: 5.3.3. Proje Seçme:** Birden fazla istek arasından seçim yapılır.
+*   **Kategoriler:** **Finansal Teknikler** (ekonomik fayda odaklı) ve **Finansal Olmayan Teknikler** (pazar payı, imaj, risk odaklı).
+
+### **Sayfa 57: Finansal Olmayan Seçim Teknikleri**
+*   **Özet:** 3 temel yöntem kullanılır:
+    1.  **Kontrol Listeleri:** Çok sayıda kriterle çetele tutulur.
+    2.  **Ağırlıklı Puan Modeli:** Kriterlere uzmanlarca ağırlık atanır.
+    3.  **Uzman Görüşleri:** Sübjektif puanların ortalaması alınır.
+
+### **Sayfa 58: Proje Beyanı (Charter) Soruları**
+*   **Alt Başlık: 5.3.4 Proje Beyanı:** Seçilen projenin ilk taslağıdır.
+*   **İçerik:** Kapsam, analiz yöntemleri, kilit katılımcılar, çıktılar, çizelge, eğitim ve sürdürülebilirlik sorularına cevap verir.
+
+### **Sayfa 59-60: MiUP Proje Adı**
+*   **Not:** MiUP verileri eğitim amaçlı sentetik olarak üretilmiştir.
+*   **Önem:** Proje adı sade ve anlaşılabilir olmalıdır. MiUP için tam isim: **"Mesleki İşyeri Uygulama Platformu (MiUP) yazılım projesi"** olarak belirlenmiştir.
+
+### **Sayfa 61-62: MiUP Proje Açıklaması**
+*   **Özet:** Türkiye'deki MYO öğrencilerinin işyeri eşleşmesini dijitalleştirmek, zaman kaybını ve verimsizliği önlemek projenin gerekçesidir. Platformun ulusal bir potansiyele sahip olduğu vurgulanır.
+
+### **Sayfa 63: Proje Amacı Tanımlama**
+*   **Özet:** Amaçlar ölçülebilir olmalı ve madde imleriyle sunulmalıdır. Projenin kabul edilebilirliğinin temelini oluşturur.
+
+### **Sayfa 64-65: MiUP'ın Özel Amaçları**
+*   **Özet:** Temel amaç, işyerlerini makine öğrenmesiyle en uygun şekilde eşleştirmektir.
+*   **Hedefler:** Öğrencilere ekonomik katkı, farklı iş kollarını deneyimleme, doğru skorlama ile etkin eşleşme ve yüksek müşteri memnuniyeti.
+
+### **Sayfa 66-67: MiUP Son Ürün Özellikleri (1-2)**
+*   **Özet:**
+    1.  **Merkezi Yönetim Paneli:** Koordinatörler için anlık durum bilgisi sunan dijital ekran.
+    2.  **Yapay Zeka Destekli Eşleştirme:** %60 teknik beceri ve %40 statik kriter (GPA, dil vb.) üzerinden 10 puanlık skorlama sistemi.
+
+### **Sayfa 68: MiUP Son Ürün Özellikleri (3-4)**
+*   **Özet:**
+    3.  **Departman Bazlı Yönetim:** Her bölüme özgü beceri seti tanımı.
+    4.  **Otomatik Takip ve Bildirim:** Başvuruların ve onayların gerçek zamanlı takibi.
+
+### **Sayfa 69: MiUP Son Ürün Özellikleri (5-7)**
+*   **Özet:**
+    5.  **Güçlü Raporlama:** Başarı metrikleri ve istatistikler.
+    6.  **Güvenlik:** KVKK uyumu, HTTPS ve rol tabanlı erişim.
+    7.  **Multi-Tenant Bulut Mimarisi:** Her kurumun kendi verisini bağımsız yönetmesi ve ulusal ölçekte yayılım.
+
+### **Sayfa 70-71: Üniversite-Sanayi Köprüsü ve Özellik Özeti**
+*   **Özet:** 8. madde olarak platformun üniversite ve sanayi arasında dijital bir köprü kurduğu, bilgi alışverişini kolaylaştırdığı belirtilir.
+
+### **Sayfa 72: Proje Takımı**
+*   **Özet:** Takım; 1 Proje Yöneticisi, 2 Sistem Analisti, 1 Backend Geliştirici, 1 Frontend Geliştirici ve yarı zamanlı ML danışmanından oluşur.
+
+### **Sayfa 73: 2025 Tahmini Bütçe**
+*   **Özet:** Tahmini bütçe **4.181.159 TL**, maksimum izin verilen bütçe (yedek dahil) ise **4.599.275 TL**'dir.
+
+### **Sayfa 74-75: Bütçe Detayları ve Altyapı**
+*   **Personel Maliyeti:** 8 ay için toplam **3.379.000 TL** (Maaş detayları verilmiştir).
+*   **Altyapı/Lisans:** Bulut sunucu, veritabanı (Supabase), e-posta servisi ve domain maliyetleri toplamı yaklaşık **56.790 TL**'dir.
+
+### **Sayfa 76-77: Proje Süresi ve İş Paketleri**
+*   **Özet:** Toplam süre tahmini **8 ay**, maksimum **10 ay**dır.
+*   **Dağılım:** Başlatma (1 ay), Planlama (1 ay), Analiz (2 ay), Tasarım (1.5 ay), Uygulama (2.5 ay).
+
+### **Sayfa 78-79: Kısıtlamalar**
+*   **Özet:** 4 personel, haftalık 40 saat çalışma sınırı, 130 günde ilk prototip ve 15 günde bir üst yönetime raporlama gibi kısıtlar vardır. Proje ilk aşamada Yeditepe Üniversitesi ile sınırlıdır.
+
+### **Sayfa 80-81: Varsayımlar ve Riskler**
+*   **Varsayımlar:** Verilerin zamanında gelmesi, personelin ayrılmaması, donanım yeterliliği ve ekip uyumu.
+*   **Riskler:** Rakip yazılımlar, personelin ayrılması, ekonomik sıkıntılar ve teknik gecikmeler.
+
+### **Sayfa 82: Kabul Kriterleri**
+*   **Özet:** Bütçe uyumu, 8 aylık süre, **%90 kullanılabilirlik**, %95 fonksiyonellik, %100 güvenlik (KVKK) ve **%85 yapay zeka eşleştirme isabeti** projenin kabul kriterleridir.
+
+***
+
+**Analoji:**
+Bu süreci bir **yolculuk planına** benzetebiliriz: **Sistem İsteği**, tatile gitme arzusudur. **Ön Değerlendirme**, bütçenizin ve zamanınızın (vizenizin) olup olmadığını kontrol etmektir. **Proje Seçimi**, gidilecek onlarca şehir arasından en mantıklısını seçmektir. **Proje Beyanı** ise biletinizi almadan önce hazırladığınız, kalacağınız otelden harcayacağınız paraya kadar her şeyi içeren o detaylı gezi rehberidir.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-index="6">
+                <div class="card-header">
+                    <div>
+                        Kutucuk 6
+                        <div class="card-sub">Kısa özet (6)</div>
+                    </div>
+                    <div class="arrow" aria-hidden></div>
+                </div>
+                <div class="card-content">
+                    <div class="note">
+                        "Proje Planlama" (6. Bölüm) dosyası (sayfa 198-233 arası), seçilen bir projenin hayata geçirilmesi için gereken beyan, fizibilite, iş kırılımı ve çizelgeleme süreçlerini MiUP vakası üzerinden detaylandırmaktadır. İşte sayfa sayfa kapsamlı özeti:
+
+### **Sayfa 198: Proje Planlama Giriş**
+*   **Başlık:** 6. PROJE PLANLAMA.
+*   **Özet:** Bu aşama; proje beyanı, iş kırılımı ve çizelgelerin hazırlanmasını kapsar. Süreç sonunda sorumlular, başlangıç/bitiş süreleri ve iş içerikleri netleşir. İş paketleri, iş kırılımı (WBS) ile aktivitelere bölünür ve ekipler atanır. Gantt veya PERT şemalarıyla toplam süre ve kilometre taşları belirlenir.
+
+### **Sayfa 199: Proje Paydaşları ve Sponsor**
+*   **Başlık:** 6.1. Proje paydaşları.
+*   **Özet:** **Proje Sahibi**, genellikle projeyi talep eden dış organizasyondur; iç projelerde sahibi ve sponsoru aynıdır. **Proje Sponsoru**, müşteri ile proje yöneticisi arasındaki köprüdür.
+*   **Sponsorun Sorumlulukları:** Ekip seçimi, bütçe/çizelge belirleme, kaynak koordinasyonu, risk yönetimi ve paydaş iletişimini kapsayan 11 temel görevi vardır.
+
+### **Sayfa 200: Proje Yöneticisi ve Özellikleri**
+*   **Başlık:** Proje Yöneticisi.
+*   **Özet:** Projenin başlatılması, yürütülmesi ve kapatılmasından sorumlu sistem analistidir. Temel görevi, sponsorun amacı ile projenin senkronizasyonunu sağlamaktır.
+*   **Kritik Özellikler:** Liderlik, iletişim, problem çözme, müzakere, zaman yönetimi, stres yönetimi ve finansal farkındalık gibi yetkinliklere sahip olmalıdır.
+
+### **Sayfa 201-203: Takım Rolleri ve Fizibilite Giriş**
+*   **Başlık:** Takım Rolleri.
+*   **Özet:** Proje ekibi üç ana kategoride rollere ayrılır:
+    1.  **Entelektüel Roller:** Değerlendirici (karar öncesi sorgular), Uzman (alan bilgisi yüksek), Mucit (yaratıcı/büyük resmi gören).
+    2.  **Aksiyon Rolleri:** İş bitirici (detaycı), Uygulayıcı (işkolik/sistematik), Düzenleyici (hırslı).
+    3.  **Sosyal Roller:** Takım oyuncusu (yardımsever), İdareci (motive edici), Girişken (yeni fikir üreten).
+*   **Fizibilite Giriş:** Bir proje fikrinin hayata geçirilip geçirilemeyeceğinin (kaynak vs. ihtiyaç karşılaştırması) sorgulanmasıdır.
+
+### **Sayfa 204: Fizibilite Türleri**
+*   **Başlık:** Fizibilite Türleri.
+*   **Özet:** Başarılı bir analiz için 6 tür fizibilite yapılmalıdır: **Ekonomik, Teknik, Operasyonel, Çizelge, Yasal ve Organizasyonel**.
+
+### **Sayfa 205-206: Ekonomik Fizibilite**
+*   **Başlık:** 6.2.1. Ekonomik Fizibilite.
+*   **Özet:** Projenin maddi zarar uğramadan yapılıp yapılamayacağını denetler. Maddi (yükselen satışlar) ve maddi olmayan (şirket imajı) yarar/maliyetler ayrıştırılır.
+*   **Adımlar:** Maddi fayda/maliyetlerin belirlenmesi, nakit akışı oluşturma, Net Bugünkü Değer (NBD), ROI ve başabaş noktası hesaplamalarını içerir.
+
+### **Sayfa 207-208: MiUP Ekonomik Fizibilite Sonuçları**
+*   **Bütçe:** 2025 piyasa koşullarına göre tahmini **4.181.159 TL**.
+*   **Maliyet Detayı:** Personel maliyeti (3,3 Milyon TL), Altyapı/Lisans (Bulut, Supabase, Domain - ~56 bin TL) ve Ofis/Eğitim/Yedek bütçeden oluşur.
+
+### **Sayfa 209-210: Teknik Fizibilite**
+*   **Başlık:** 6.2.2. Teknik Fizibilite.
+*   **Özet:** Firmanın teknik kaynaklarının ve ekibinin projeyi tamamlamaya yetip yetmeyeceğini analiz eder.
+*   **MiUP Sonucu:** Donanımlar mevcut, hız için güçlü bir laptop alınacak, sunucu hizmeti dışarıdan (bulut) temin edilecektir.
+
+### **Sayfa 211-212: Operasyonel Fizibilite**
+*   **Başlık:** 6.2.3. Operasyonel Fizibilite.
+*   **Özet:** Gereksinimlerin karşılanma derecesini ve bakım kolaylığını inceler. "Kullanıcılar kabul ediyor mu?", "Eğitim süreci ne kadar sürer?" gibi soruları yanıtlar.
+*   **MiUP Sonucu:** Kullanıcılar (öğrenci/işveren) sistemi olumlu karşılamış, manuel iş yükünün azalacağı öngörülmüştür.
+
+### **Sayfa 213-216: Çizelge Fizibilitesi ve Yasal Fizibilite**
+*   **Çizelge:** Proje zamanında bitebilir mi?. MiUP için 8-10 aylık süre ve sınav haftalarına göre bırakılan tampon süreler yeterli bulunmuştur.
+*   **Yasal:** Hukuki engel var mı?. MiUP için **KVKK uyumu**, HTTPS şifreleme ve marka tescili (TradeMark) planlanmıştır.
+
+### **Sayfa 218-219: Organizasyonel Fizibilite**
+*   **Özet:** Sistemin kurum kültürüne uyumunu analiz eder. MiUP'ın **çok kiracılı (multi-tenant)** yapısı sayesinde her kurumun bağımsız veri yönetebileceği ve organizasyonel riskin düşük olduğu saptanmıştır.
+
+### **Sayfa 220-223: İş Kırılımı (WBS)**
+*   **Başlık:** 6.3. İş Kırılımı.
+*   **Özet:** Proje kapsamını hiyerarşik olarak daha küçük ve yönetilebilir parçalara bölme aracıdır.
+*   **Hiyerarşi:** 1. Proje, 2. Aşama, 3. İş Paketi, 4. Aktivite. Doğru organizasyon, sorumluluk dağılımı ve maliyet tahmini sağlar.
+
+### **Sayfa 224-227: MiUP İş Kırılımı Örneği**
+*   **Hazırlık:** Proje beyanı okunarak teslimat odaklı liste oluşturulur.
+*   **MiUP Liste ve Görsel:** Başlatma, Planlama (Sistem isteği, ön değerlendirme), Analiz, Tasarım ve Uygulama olmak üzere 5 ana aşamada görselleştirilmiştir.
+
+### **Sayfa 228-230: Gantt Şeması**
+*   **Başlık:** 6.4.1. Gantt Şeması.
+*   **Özet:** Faaliyetlerin başlangıç/bitişini ve sorumluları gösteren çubuk grafiktir.
+*   **Detay:** Sıra, öncelik ve süre sütunlarını içerir. MiUP planlama aşaması örneğinde toplam süre 15 gün olarak hesaplanmıştır.
+
+### **Sayfa 231-233: PERT Diyagramı ve Kritik Yol**
+*   **Başlık:** 6.4.2. PERT Diyagramı.
+*   **Özet:** Faaliyetler arası öncelik ilişkisini ağ diyagramıyla gösterir ve darboğazları belirler.
+*   **Kritik Yol:** Ağ üzerindeki en uzun süreli yoldur. MiUP örneğinde kritik yol (1-4-5-6-7-11-12-13-14) toplam 15 birim süredir.
+
+***
+
+**Analoji:**
+Proje planlamayı bir **profesyonel mutfak operasyonuna** benzetebiliriz: **İş Kırılımı (WBS)**, menüdeki bir yemeği malzemelerine ve hazırlık aşamalarına (doğrama, pişirme, sunum) bölmektir. **Fizibilite**, "Elimizde bu yemek için malzeme ve şef var mı, maliyeti kurtarıyor mu?" diye bakmaktır. **Gantt Şeması**, hangi şefin hangi saatte ne yapacağını gösteren çalışma tablosudur. **PERT ve Kritik Yol** ise yemeğin masaya gitmesi için en uzun süren işlemin (örneğin etin pişme süresi) belirlenmesidir; o işlem gecikirse tüm servis aksar.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-index="7">
+                <div class="card-header">
+                    <div>
+                        Kutucuk 7
+                        <div class="card-sub">Kısa özet (7)</div>
+                    </div>
+                    <div class="arrow" aria-hidden></div>
+                </div>
+                <div class="card-content">
+                    <div class="note">
+                        "Gereksinim Analizi" (7. Bölüm) dosyası (sayfa 165-197 arası), yazılım projelerinde ihtiyaçların nasıl belirleneceğini, sınıflandırılacağını, analiz edileceğini ve doğrulanacağını MiUP vakası ve teorik yöntemler üzerinden detaylandırmaktadır. İşte sayfa sayfa tüm başlıkları ve bilgileri içeren kapsamlı özet:
+
+### **Sayfa 165: Bölüm Girişi ve Gereksinim Karakteristikleri**
+*   **Başlık:** 7. GEREKSİNİM ANALİZİ.
+*   **Özet:** Gereksinimleri belirlemenin sistematik bir yaklaşım gerektirdiği, yanlış belirlenen bir gereksinimin maliyetinin çok yüksek olduğu vurgulanır.
+*   **Gereksinim Karakteristikleri:**
+    *   **Tutarlı:** Çelişki ve belirsizlik olmamalı.
+    *   **Tam:** Tüm olası sistem girişlerini ve yanıtlarını açıklamalı.
+    *   **Uygulanabilir:** Mevcut kaynak ve kısıtlarla karşılanabilir olmalı.
+    *   **Gerekli:** Sistemin amacına hizmet etmeli.
+    *   **Doğru:** Hatalı bilgi içermemeli.
+    *   **İzlenebilir:** Doğrudan işlevlere eşlenebilir olmalı.
+    *   **Doğrulanabilir:** Test edilebilir şekilde tanımlanmalı.
+
+### **Sayfa 166-167: Yazılım Gereksinimleri Tanımı ve Tutarlılık**
+*   **Alt Başlık:** 7.1. Yazılım Gereksinimleri.
+*   **Tanım:** En basit haliyle "gerekli olan her şey"; geniş anlamda "bir iş ihtiyacının belirtimi"dir. Yazılım özelinde ise paydaşların beklentilerini karşılayan arayüz ve ihtiyaçlardır.
+*   **MiUP Örneğinde Tutarlılık:** Bir gereksinim öğrencinin ilana başvurabileceğini söylüyorsa, diğer gereksinim de firmanın bu başvuruyu görüp onaylamasını sağlamalıdır; kurallar birbirini desteklemelidir.
+
+### **Sayfa 168: MiUP - Tamlık ve Uygulanabilirlik**
+*   **Tamlık:** Başvuru sürecinin başından sonuna (profil -> başvuru -> takip -> değerlendirme) tüm adımlar düşünülmelidir.
+*   **Uygulanabilirlik:** Gereksinimlerin teknik altyapı ve imkanlar açısından gerçekçi olması gerekir.
+
+### **Sayfa 169-170: MiUP - Gereklilik, Doğruluk ve Doğrulanabilirlik**
+*   **Gereklilik:** Özelliğin platform için "olmazsa olmaz" olmasıdır (örneğin profil güncelleme).
+*   **Doğruluk:** Neyin istendiğinin açık olmasıdır (örneğin "PDF formatında CV yükleme").
+*   **İzlenebilirlik ve Doğrulanabilirlik:** Gereksinimin karşılanıp karşılanmadığı test edilebilmelidir (örneğin "Sistem 1000 kullanıcıyı desteklemeli").
+*   **Temel Ayrım:** Yazılımın **"ne"** yapması gerektiği **Fonksiyonel**, **"nasıl"** yapması gerektiği **Fonksiyonel Olmayan** gereksinimdir.
+
+### **Sayfa 171: Fonksiyonel Gereksinimler (Genel)**
+*   **Alt Başlık:** 7.1.1. Fonksiyonel Gereksinimler (Temel-Ana İşlevleri).
+*   **Özet:** Sistemin ne yapması gerektiğini tanımlar; kullanıcı türüne ve organizasyona bağlıdır. Kullanıcıların anlaması için **doğal dilde** yazılmalıdır. Her yazılım için özgündür.
+
+### **Sayfa 172-174: MiUP - Fonksiyonel Gereksinim Detayları**
+*   **1. Profil Oluşturma:** Öğrenci ve firmanın yetkinliklerini/şartlarını belirlemesi.
+*   **2. Eşleştirme Algoritması:** Teknik ve teknik olmayan özelliklerin puanlanarak uyum skoru oluşturması.
+*   **3. Teklif ve Kabul/Red:** Eşleşen tarafların birbirine teklif yapabilmesi ve kota yönetimi.
+*   **4. Profil Güncelleme:** Yeni yetenek ekleme veya tercih değiştirme imkanı.
+*   **5. Dokümantasyon Yönetimi:** Birden fazla CV yükleme, aktif hale getirme ve güncelleme işlemleri.
+
+### **Sayfa 175: Fonksiyonel Olmayan Gereksinimler (Kalite)**
+*   **Alt Başlık:** 7.1.1. Fonksiyonel Olmayan Gereksinimler (Yazılım Kalite Beklentisi).
+*   **Özet:** İşlevselliği güvence altına alan (güvenilirlik, kullanılabilirlik vb.) gereksinimlerdir. Benzer yazılımlar arasındaki farkı bu gereksinimler belirler. Ürün odaklı, organizasyonel ve dış çevre olmak üzere üç kategoridedir.
+
+### **Sayfa 176-177: Ürün Odaklı Fonksiyonel Olmayan Gereksinimler**
+*   **Sürüm Öncesi (Süreç Odaklı):**
+    *   **Güvenlik:** Erişim kontrolü ve şifreleme (örneğin 1024 bit, HTTPS).
+    *   **Güvenirlik:** Sistemin kararlılığı, darboğaz ve hata tepkileri.
+    *   **Desteklenebilirlik:** Kurulum, izleme ve otomatik güncellemeler.
+    *   **Tasarım:** Donanım kısıtları (örneğin 1 GHz işlemci, 300 MB alan).
+    *   **Fiziksel:** Donanım boyut/ağırlık/güç özellikleri (örneğin hafiflik için SSD).
+*   **Sürüm Sonrası (Kullanıcı Odaklı):**
+    *   **Kullanılabilirlik:** UI standartları ve yardım belgeleri.
+    *   **Performans:** İş yükü ve yanıt süresi ölçümleri.
+
+### **Sayfa 178-179: MiUP - Fonksiyonel Olmayan Gereksinim Uygulaması**
+*   **Güvenlik ve Güvenilirlik:** Multi-tenant veri izolasyonu, rol tabanlı erişim (RBAC) ve Selenium UI testleri.
+*   **Arayüz ve Kullanılabilirlik:** Tutarlı MiUP UX standartları; tüm öğelerin aynı yerde ve biçimde olması.
+*   **Desteklenebilirlik:** GitHub üzerinden kolay "deploy" ve hızlı güncelleme.
+*   **Performans:** Bulut üzerinde yüksek kapasiteli işlemciyle hızlı deneyim.
+
+### **Sayfa 180-181: Fonksiyonel ve Fonksiyonel Olmayan Karşılaştırması**
+*   **Ayrım:** Fonksiyonel hatalar sistemin bir parçasını etkiler (ödeme çalışmaz ama site açık kalır); fonksiyonel olmayan hatalar sistemi tamamen kullanışsız kılabilir (yasal olmayan ödeme sistemi nedeniyle sitenin kapatılması).
+*   **Karşılaştırma Tablosu:** Fonksiyonel olanlar "İş" ile alakalıdır ve testi kolaydır; fonksiyonel olmayanlar "Performans" odaklıdır ve teknik test gerektirir.
+
+### **Sayfa 182: Gereksinim Keşfi ve Mühendisliği**
+*   **Alt Başlık:** 7.2. Gereksinim Keşfi.
+*   **Özet:** Kaynakların kurallarını ve politikalarını ortaya çıkarma sürecidir.
+*   **Gereksinim Mühendisliği Süreci:** Keşif -> Değerlendirme -> Sınıflandırma -> Çatışma Çözümü -> Önceliklendirme -> Doğrulama -> Dokümantasyon.
+
+### **Sayfa 183-184: Geleneksel Yöntemler**
+*   **Alt Başlık:** 7.2.1. Geleneksel Yöntemler.
+*   **Beyin Fırtınası:** Uzmanların toplanıp eksiksiz gereksinim çekmeye çalışması.
+*   **Mülakatlar:** Paydaşlarla yüz yüze yapılan yapısal soru-cevap süreci.
+*   **Anketler:** Çok fazla kişiye kolayca ulaşabilme avantajı sağlar.
+*   **Çalıştaylar:** Moderatör eşliğinde bilgi üretimini destekleyen yapısal toplantılardır.
+
+### **Sayfa 185: Gözlem ve Modern Yöntemler**
+*   **Gözlem (Etnografi):** Çalışanları iş ortamında rahatsız etmeden izleyerek problem belirleme.
+*   **Alt Başlık:** 7.2.2. Modern Yöntemler.
+*   **Kıyaslama (Benchmarking):** SAP veya Oracle gibi iyi yazılımları inceleme.
+*   **Ortak Uygulama Tasarımı (OUT/JAD):** Paydaşların uzun süreli bir araya gelip eş zamanlı gereksinim toplaması.
+
+### **Sayfa 186-187: OUT Rolleri ve Değerlendirme**
+*   **OUT Rolleri:** Sponsor (karar verici), Lider (yönetici), Kullanıcılar, Yazıcılar (not tutan) ve BT Çalışanları (teknik notlar).
+*   **Prototipleme:** HUG ve çevik modellerde kullanılan taslak sistemler.
+*   **Alt Başlık:** 7.3.1. Değerlendirme.
+*   **Özet:** Toplanan gereksinimlerin kayıt altına alınıp ön fizibiliteyle sorgulanmasıdır.
+
+### **Sayfa 188: Değerlendirme Türleri**
+*   **Teknik:** Teknolojinin ulaşılabilirliği.
+*   **Ekonomik:** Teknolojinin bütçeye uygunluğu.
+*   **Çizelge:** Gereksinimin proje süresi içinde karşılanabilirliği.
+
+### **Sayfa 189-190: Sınıflandırma ve Çatışma Çözümü**
+*   **Alt Başlık:** 7.3.2. Sınıflandırma. Gereksinimlerin fonksiyonel/fonksiyonel olmayan gruplara ayrılması.
+*   **Alt Başlık:** 7.3.3. Çatışma Çözümü.
+*   **Adımlar:** Belirleme, Analiz, Çözümleme ve Dokümantasyon.
+*   **Çatışma Türleri:** Konu, Amaç, Değer ve İlişki çatışmaları.
+
+### **Sayfa 191-192: Çözümleme Yöntemleri ve Önceliklendirme**
+*   **Çözümleme:** Antlaşma (ikna), Uzlaşma, Oylama veya Geçersiz Kılma (üst yönetim kararı).
+*   **Dokümantasyon:** Çatışmanın kaynağı ve çözüm kaydı.
+*   **Alt Başlık:** 7.3.3. Önceliklendirme. Özellikle aşamalı modellerde ilk sürümlerin başarısı için kritiktir.
+
+### **Sayfa 193: Önceliklendirmenin Önemi**
+*   **Faydalar:** Kapsamı zaman ve bütçeye göre değerlendirme, ticari fayda/maliyet dengesi kurma, yeniden çalışmayı en aza indirme ve en düşük maliyetle en büyük değeri sağlama.
+
+### **Sayfa 194-195: Gereksinim Doğrulama**
+*   **Alt Başlık:** 7.4. Gereksinim Doğrulama. Bilgilerin doğruluk, tamlık ve tutarlılık açısından incelenmesidir.
+*   **Doğrulama vs. Geçerlilik:** Doğrulama "doğru ürünü" (gereksinimleri), geçerlilik "doğru inşa sürecini" sorgular.
+*   **Kontrol Kriterleri:** Geçerlilik, Tutarlılık, Tamlık, Gerçekçilik ve Doğrulanabilirlik.
+
+### **Sayfa 196-197: Gereksinim Dokümantasyonu**
+*   **Alt Başlık:** 7.5. Gereksinim Dokümantasyonu.
+*   **Gereksinim Beyanı:** Gereksinim türünü, önemini ve kaynağını içeren temel belgedir.
+*   **SRS (System Requirement Specification):** Amaç, kapsam ve teknik detayları içeren çok daha geniş bir formdur.
+*   **Örnek Form:** Sayfa 197'de fonksiyonel/fonksiyonel olmayan gereksinimlerin, öncelik ve kaynak bilgisiyle sunulduğu bir şema yer alır.
+
+***
+
+**Analoji:**
+Gereksinim analizini bir **terziye takım elbise diktirmeye** benzetebiliriz: **Fonksiyonel gereksinimler**, elbisenin ceketinin, pantolonunun olması ve düğmelerinin iliklenmesidir (ne yapacağı). **Fonksiyonel olmayan gereksinimler** ise kumaşın kalitesi, dikişlerin sağlamlığı ve elbisenin vücuda tam oturmasıdır (nasıl olacağı). Terzi sizinle konuşup (mülakat), benzer modelleri gösterip (kıyaslama) ve ölçülerinizi alıp bir taslak çıkararak (prototip) sonunda size en uygun, "doğrulanmış" elbiseyi hazırlar.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-index="8">
+                <div class="card-header">
+                    <div>
+                        Kutucuk 8
+                        <div class="card-sub">Kısa özet (8)</div>
+                    </div>
+                    <div class="arrow" aria-hidden></div>
+                </div>
+                <div class="card-content">
+                    <div class="note">
+                        "Uygulama ve Sürdürülebilirlik" (8. Bölüm) dosyası (sayfa 234-267), Sistem Geliştirme Yaşam Çevrimi'nin (SGYÇ) son aşaması olan yazılımın hayata geçirilmesi, test edilmesi, kurulması ve uzun vadeli yönetim süreçlerini kapsamaktadır. İşte sayfa sayfa tüm detaylar:
+
+### **Sayfa 234-235: Bölüm Girişi ve Faaliyetler**
+*   **Ana Başlık:** 8. UYGULAMA VE SÜRDÜRÜLEBİLİRLİK.
+*   **Özet:** SGYÇ'nin son aşamasıdır. Tasarlanan sistemin kodlanması, güvenirliğinin artırılması, kurulumu ve kurulum sonrası yönetimini kapsar.
+*   **Şematik Özet (Şekil 8.1):**
+    *   **Uygulama:** Kodlama, Güvenirlik (Güvenlik ve Test) ve Kurulum süreçlerinden oluşur.
+    *   **Sürdürülebilirlik:** Dokümantasyon, Eğitim ve Destek, Performans Yönetimi, Bakım, Yedekleme ve Kurtarma faaliyetlerini içerir.
+    *   **Not:** Her iki aşama da programın başarısı için doğrudan etkilidir.
+
+### **Sayfa 236-237: Kodlama Süreci ve Standartlar**
+*   **Alt Başlık:** 8.1. Kodlama.
+*   **Tanım:** Program mantığının bilgisayarların anlayabileceği yönergelere çevrilmesidir.
+*   **Kodlamanın 3 Temel Amacı:**
+    1. Tasarımı bilgisayar diline dönüştürmek.
+    2. Test ve bakım maliyetlerini düşürmek.
+    3. Programın okunabilirliğini artırarak sürdürülebilirliğe katkı sağlamak.
+*   **Yazılım Dili Özellikleri:** Okunabilirlik, taşınabilirlik, genelleştirilebilirlik, yalınlık, hata kontrolü, çevrilebilirlik ve yaygın kullanım önemlidir.
+*   **Kodlama Standartları:** Girintiler kullanmak, satır içi açıklamalar eklemek, boşluklara dikkat etmek, satır uzunluğunu (maks. 80 karakter) sınırlamak ve fonksiyonları kısa tutmak esastır.
+
+### **Sayfa 238-239: Sistem Güvenirliği ve CIA Üçgeni**
+*   **Başlık:** 8.2. Sistem Güvenirliği - 8.2.1. Sistem Güvenliği.
+*   **Özet:** Güvenlik, sistemi korur ve güvenirliği mümkün kılar.
+*   **CIA Üçgeni (Şekil 8.2):**
+    1. **Gizlilik (Confidentiality):** Yetkisiz erişimleri ve ifşayı engeller.
+    2. **Bütünlük (Integrity):** Yetkisiz veri oluşturma, düzenleme veya silmeyi engeller.
+    3. **Ulaşılabilirlik (Availability):** Yetkili kullanıcıların ihtiyaç duyduklarında veriye erişmesini sağlar.
+*   **Tehdit Kaynakları:** Kötü niyetli girişimlerin (hırsızlık, gasp) yanı sıra donanım hataları, altyapı sorunları (enerji) ve doğal afetler de dikkate alınmalıdır.
+
+### **Sayfa 240-241: Güvenlik Tehditleri ve Saldırı Türleri**
+*   **Kimden Gelir:** Tehditler hem firma içinden (çalışanlar, yetkilendirme hataları) hem dışarıdan (korsanlar, casuslar, siber teröristler) gelebilir.
+*   **Saldırı Türleri Listesi:**
+    *   **Arka Kapı, Çöp Karıştırma, Kötü Niyetli Kod (Virüs vb.), Şifre Kırma, Balık Tutma (Phishing)**.
+    *   **Ayrıcalık Yükseltme, Paket Avlama, Araya Girme, IP Sahteciliği**.
+    *   **Sosyal Mühendislik, Hizmet Reddi (DoS), Spam ve Mail Bombardımanı**.
+
+### **Sayfa 242-243: Sistem Testleri ve Birim Testi**
+*   **Alt Başlık:** 8.2.2. Sistem Testleri.
+*   **Özet:** Kodlar biter bitmez kurulum yapılmaz; tüm birimler, entegrasyon ve sistem bütünü test edilir.
+*   **4 Temel Test Türü (Şekil 8.5):**
+    1. **Birim Testi (Unit Test):** Spesifik bir modülün işlevini test eder. Gereksinimlere uyumu sorgular.
+    2. **Yöntemler:** "Sürücü" (hayali girdi) ve "İz" (stub - çıktı değerlendirici) yardımıyla senaryo bazlı yapılır.
+
+### **Sayfa 244-245: Birim ve Entegrasyon Testleri Detayı**
+*   **Birim Testi İşleyişi (Şekil 8.6):** Gerçek kullanım veya sürücü/iz yapıları üzerinden hem doğru hem de kasten yanlış girilmiş verilerle sistem zorlanır.
+*   **Entegrasyon Testi:** Bir birimin çıktısının diğerinin girdisi olduğu durumlarda, birimler arası ilişkinin ve toplam çıktının doğruluğunu sorgular.
+
+### **Sayfa 246-247: Sistem ve Kabul Testleri**
+*   **Sistem Testi:** Yazılımın tamamının entegrasyonu olarak düşünülür. İşletme fonksiyonları, tepki süreleri, kararlılık, kaynak kullanımı, verim ve hız değerlendirilir.
+*   **Kabul Testi:** Son kullanıcı tarafından yapılır. Sistemin kullanıcı gereksinimlerini karşılayıp karşılamadığına dair verilen son onaydır ve işletme dışında yapılan tek testtir.
+
+### **Sayfa 248: Test Aşamalarında Hata Oranları**
+*   **Özet (Şekil 8.8):** En çok hata genellikle **Entegrasyon Testleri** sırasında ortaya çıkar. Sistem ve Kabul testi aşamalarına sarkan hataların telafisi ise çok daha zordur.
+
+### **Sayfa 249-251: Kurulum Stratejileri**
+*   **Alt Başlık:** 8.3. Kurulum.
+*   **1. Direkt Kurulum:** Eski sistem kapatılır, yeni sistem hemen açılır. Düşük maliyetli ama yüksek risklidir; hata anında eski sisteme dönmek zordur.
+*   **2. Paralel Kurulum:** İki sistem bir süre beraber çalışır. Eski sistem güvenlik ağı işlevi görür. Güvenlidir ancak yüksek maliyetli ve kafa karıştırıcı olabilir.
+*   **3. Aşamalı Kurulum:** Sistem modüler bazda adım adım kurulur. Riski dağıtır ancak eski ve yeni sistemin beraber çalışması için ek kodlama (entegrasyon) yükü getirir.
+
+### **Sayfa 252: Kurulum Alternatiflerinin Karşılaştırılması**
+*   **Grafik (Şekil 8.9):**
+    *   **Direkt:** Düşük Maliyet - Yüksek Risk.
+    *   **Paralel:** Yüksek Maliyet - Düşük Risk.
+    *   **Aşamalı:** Orta Maliyet - Orta Risk (Günümüzde denge nedeniyle en çok bu tercih edilir).
+
+### **Sayfa 253-254: Sürdürülebilirlik ve Dokümantasyon**
+*   **Alt Başlık:** 8.4. Sürdürülebilirlik - 8.4.1. Dokümantasyon.
+*   **Özet:** Yazılımın sorunsuz çalışmasını garanti eden faaliyetlerdir.
+*   **Türler:**
+    1. **Sistem Dokümantasyonu:** Programcılara rehberlik eder. Veri sözlüğü, VAD (DFD), nesne modelleri ve ekran düzenlerini içerir.
+    2. **Kullanıcı Dokümantasyonu:** Son kullanıcılar için yardım belgeleri ve hata yönetim kılavuzlarıdır.
+
+### **Sayfa 255-258: Eğitim ve Destek Süreci**
+*   **Alt Başlık:** 8.4.2. Eğitim ve Destek.
+*   **Strateji:** Kimlere (kullanıcılar, yöneticiler, BT personeli) ve hangi konularda (UI, raporlar, teknik mimari) eğitim verileceği belirlenir.
+*   **Eğitim Vericiler:** Genelde sistem analistleridir; satın alınan yazılımlarda ise satıcı firmalar eğitim verir.
+*   **Karar Noktaları:** Eğitimin amacı, yöntemi (uygulamalı/sunum), yeri ve materyalleri (kılavuz, prototip) planlanmalıdır.
+
+### **Sayfa 259-261: Performans Yönetimi ve Metrikler**
+*   **Alt Başlık:** 8.4.3. Performans Yönetimi.
+*   **Özet:** Gösterge panelleri ve eşik değerlerle sistem izlenir.
+*   **3 Temel Ayak:** Hata önleme, Hata yönetimi (reaktif) ve İş yükü yönetimi (proaktif).
+*   **İş Yükü Metrikleri:** CPU kullanımı, verim (iş sayısı), tepki süresi, bant genişliği, geri dönüş süresi ve bekleme süresi.
+*   **Kapasite Yönetimi:** Gelecekteki geliştirmeler için kapasite tahminleri yapılır.
+
+### **Sayfa 262-263: Bakım Türleri ve Maliyetleri**
+*   **Alt Başlık:** 8.4.4. Bakım.
+*   **4 Bakım Türü:**
+    1. **Düzeltici Bakım:** Hataların onarılması (reaktif).
+    2. **Uyarlayıcı Bakım:** Değişen gereksinimlere (mobil destek vb.) uyum sağlama.
+    3. **İyileştirici Bakım:** Mevcut performansı artırma (donanım güncelleme vb.).
+    4. **Önleyici Bakım:** Gelecekteki sorunları engelleme (antivirüs, yedekleme planı).
+*   **Maliyet İlişkisi:** Uyarlayıcı bakım, değişim yönetimi ihtiyacı nedeniyle en yüksek maliyetli alanlardan biridir.
+
+### **Sayfa 264-267: Yedekleme ve Kurtarma**
+*   **Alt Başlık:** 8.4.4. Yedekleme ve Kurtarma.
+*   **Özet:** Doğal afet veya saldırı durumları için B planıdır. Yedeklerin farklı fiziksel ortamlarda ve bazen sistemle bağlantısız saklanması önerilir.
+*   **Yedekleme Türleri (Tablo 8.12):**
+    *   **Tam:** Tüm dosyalar yedeklenir. Kurtarma çok hızlı, yedekleme yavaştır (Haftalık/Aylık).
+    *   **Ayırıcı (Differential):** Son tam yedekten beri değişenler (Günlük/Haftalık).
+    *   **Artırımlı (Incremental):** Herhangi bir yedekten beri değişenler. En düşük alan ihtiyacı, en zor kurtarma (Günlük veya daha sık).
+    *   **Sürekli:** Gerçek zamanlı. En maliyetli ama en hızlı kurtarma.
+*   **Kurtarma Planı:** Sistemin kapalı kalma toleransına göre yedekleme sıklığı artırılmalıdır.
+
+***
+
+**Analoji:**
+Bu süreci bir **yeni otomobil modelinin piyasaya sürülmesine** benzetebiliriz: **Kodlama**, otomobilin fabrikada monte edilmesidir. **Güvenirlik ve Test**, otomobilin çarpışma testlerinden (güvenlik) ve pist denemelerinden (performans) geçmesidir. **Kurulum**, aracın bayilere sevkiyatı ve satışa sunulmasıdır. **Sürdürülebilirlik** ise aracın kullanım kılavuzunun (dokümantasyon) hazırlanması, şoförün eğitimi, periyodik bakımları ve olası arızalar için sunulan teknik servis desteğidir. Eğer bakımları (sürdürülebilirliği) ihmal ederseniz, otomobil ne kadar iyi tasarlanmış olursa olsun kısa sürede yolda kalacaktır.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="hint">Not: Notları düzenlemek için bu dosyayı açın ve ilgili <!-- NOT X: ... --> yorumunun içini değiştirin.</div>
+
+        <!-- Sesli not oynatıcı: Aşağıya .m4a dosyanızın yolunu ekleyin. -->
+        <div class="audio-player" id="audioPlayer">
+            <!-- AUDIO FILE: The audio file is in the repo root next to index.html -->
+            <audio id="audio" preload="metadata" src="notses.m4a"></audio>
+
+            <div class="audio-left">
+                <button id="playBtn" class="play-btn">Play</button>
+                <button id="speedBtn" class="speed-btn">1x</button>
+            </div>
+
+            <div class="progress-wrap">
+                <input type="range" id="progress" class="progress" value="0" min="0" step="0.1">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+                    <div class="time" id="current">0:00</div>
+                    <div style="flex:1"></div>
+                    <div class="time" id="duration">0:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Basit toggle: başlığa tıklayınca içerik açılır/kapanır.
+        document.querySelectorAll('.card').forEach(card => {
+            const header = card.querySelector('.card-header');
+            const content = card.querySelector('.card-content');
+            header.addEventListener('click', () => {
+                const isOpen = card.classList.toggle('open');
+                if (isOpen) {
+                    // maxHeight to fit content (smooth)
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    card.setAttribute('aria-expanded','true');
+                } else {
+                    content.style.maxHeight = '0px';
+                    card.setAttribute('aria-expanded','false');
+                }
+            });
+        });
+    </script>
+
+    <script>
+        // Audio player controls
+        (function(){
+            const audio = document.getElementById('audio');
+            const playBtn = document.getElementById('playBtn');
+            const progress = document.getElementById('progress');
+            const current = document.getElementById('current');
+            const duration = document.getElementById('duration');
+            const speedBtn = document.getElementById('speedBtn');
+
+            if(!audio) return;
+
+            function fmt(t){
+                if(!isFinite(t)) return '0:00';
+                const m = Math.floor(t/60);
+                const s = Math.floor(t%60).toString().padStart(2,'0');
+                return m+':'+s;
+            }
+
+            // When metadata loaded, set duration and progress max
+            audio.addEventListener('loadedmetadata', ()=>{
+                progress.max = Math.floor(audio.duration || 0);
+                duration.textContent = fmt(audio.duration);
+            });
+
+            // Update progress as audio plays
+            audio.addEventListener('timeupdate', ()=>{
+                progress.value = Math.floor(audio.currentTime);
+                current.textContent = fmt(audio.currentTime);
+            });
+
+            // Play / Pause
+            playBtn.addEventListener('click', ()=>{
+                if(audio.paused){
+                    audio.play();
+                    playBtn.textContent = 'Pause';
+                } else {
+                    audio.pause();
+                    playBtn.textContent = 'Play';
+                }
+            });
+
+            // Seek when user drags the range
+            let seeking = false;
+            progress.addEventListener('input', (e)=>{
+                seeking = true;
+                current.textContent = fmt(Number(e.target.value));
+            });
+            progress.addEventListener('change', (e)=>{
+                audio.currentTime = Number(e.target.value);
+                seeking = false;
+            });
+
+            // Speed toggle: 1x / 2x
+            speedBtn.addEventListener('click', ()=>{
+                if(audio.playbackRate === 1){
+                    audio.playbackRate = 2;
+                    speedBtn.textContent = '2x';
+                } else {
+                    audio.playbackRate = 1;
+                    speedBtn.textContent = '1x';
+                }
+            });
+
+            // Reset play button text when audio ends
+            audio.addEventListener('ended', ()=>{
+                playBtn.textContent = 'Play';
+                progress.value = 0;
+                current.textContent = '0:00';
+            });
+        })();
+    </script>
+</body>
+</html>
